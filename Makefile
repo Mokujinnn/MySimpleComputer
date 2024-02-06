@@ -1,4 +1,2 @@
-all: console
-
-console: console/test.c
-	make --makefile=console/Makefile
+all:
+	$(MAKE) -C console
