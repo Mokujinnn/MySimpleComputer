@@ -1,9 +1,10 @@
-int sc_commandValidate(int command)
+int
+sc_commandValidate (int command)
 {
-    if (command >= 0 && command <= 0x7f)
+  if (command >= 0 && command <= 0x7f)
     {
-        return 0;
+      return 0;
     }
 
-    return -1;
+  return -1;
 }

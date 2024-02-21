@@ -1,12 +1,13 @@
 #include "sc_variables.h"
 
-int sc_accumulatorGet(int * value)
+int
+sc_accumulatorGet (int *value)
 {
-    if (!value)
+  if (!value)
     {
-        return -1;
+      return -1;
     }
 
-    *value = ACC;
-    return 0;
+  *value = ACC;
+  return 0;
 }

@@ -1,17 +1,18 @@
-#include <stdio.h>
 #include "sc_variables.h"
+#include <stdio.h>
 
-int sc_memoryLoad(char *filename)
+int
+sc_memoryLoad (char *filename)
 {
-	FILE *fp = fopen(filename, "rb");
-	if (!fp)
-	{
-		return -1;
-	}
+  FILE *fp = fopen (filename, "rb");
+  if (!fp)
+    {
+      return -1;
+    }
 
-	fread(MEM, sizeof(int), SIZEMEM, fp);
+  fread (MEM, sizeof (int), SIZEMEM, fp);
 
-	fclose(fp);
+  fclose (fp);
 
-	return 0;
+  return 0;
 }

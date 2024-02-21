@@ -1,12 +1,13 @@
 #include "sc_variables.h"
 
-int sc_icounterGet (int * value)
+int
+sc_icounterGet (int *value)
 {
-    if (!value)
+  if (!value)
     {
-        return -1;
+      return -1;
     }
-    
-    *value = INST_COUNTER;
-    return 0;
+
+  *value = INST_COUNTER;
+  return 0;
 }

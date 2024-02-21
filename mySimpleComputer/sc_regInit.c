@@ -1,6 +1,7 @@
 #include "sc_variables.h"
 
-void sc_regInit()
+void
+sc_regInit ()
 {
-    REG_FLAG = 0x10; // bin: 10000
+  REG_FLAG = 0x10; // bin: 10000
 }

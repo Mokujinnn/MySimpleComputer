@@ -1,6 +1,7 @@
 #include "sc_variables.h"
 
-void sc_accumulatorInit()
+void
+sc_accumulatorInit ()
 {
-    ACC = 0;
+  ACC = 0;
 }
