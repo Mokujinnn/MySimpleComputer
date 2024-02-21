@@ -7,6 +7,7 @@ int main()
 {
 	sc_regInit();
 	sc_accumulatorInit();
+	sc_icounterInit();
 
 	sc_accumulatorSet(1527);
 
@@ -25,7 +26,11 @@ int main()
 
 	// printDecodedCommand(127);
 
-	printAccumulator();
+	// printAccumulator();
+
+	sc_icounterSet(1000);
+
+	printCounters();
 
 	return 0;
 }
