@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "console.h"
 #include "mySimpleComputer.h"
@@ -15,7 +16,7 @@ printMem ()
   for (int i = 0; i < SIZEMEM; ++i)
     {
       printCell (i);
-      printf (" ");
+      write(STDOUT_FILENO, " ", 1);
 
       if ((i + 1) % 10 == 0)
         {

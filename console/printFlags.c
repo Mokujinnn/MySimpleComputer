@@ -1,4 +1,5 @@
 #include "mySimpleComputer.h"
+#include <unistd.h>
 
 void
 printFlags ()
@@ -16,5 +17,5 @@ printFlags ()
         }
     }
 
-  fwrite (str, 1, 10, stdout);
+  write(STDOUT_FILENO, str, 10);
 }

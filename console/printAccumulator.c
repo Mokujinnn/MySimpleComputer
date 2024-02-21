@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 
 #include "mySimpleComputer.h"
 
@@ -17,5 +18,5 @@ printAccumulator ()
   str[4] = sign == 0 ? '+' : '-';
 
   snprintf (&str[5], 15, "%.2x%.2x hex: %.4x", command, operand, value);
-  fwrite (str, 1, 21, stdout);
+  write(STDOUT_FILENO, str, 21);
 }

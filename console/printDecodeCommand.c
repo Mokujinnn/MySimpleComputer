@@ -1,11 +1,13 @@
 #include <stdio.h>
+#include <unistd.h>
 
 void
 printDecodedCommand (int value)
 {
-  char bin[16];
-  char str[60];
+  char bin[16] = {0};
+  char str[60] = {0};
 
+  // int fd = open(stdout, )
   int tmp = value;
 
   for (int i = 0; i < 15; ++i)
@@ -16,5 +18,5 @@ printDecodedCommand (int value)
   snprintf (str, 60, "dec: %.5d | oct: %.6o | hex: %.4x | bin: %s", value,
             value, value, bin);
 
-  fwrite (str, 1, 60, stdout);
+  write(STDOUT_FILENO, str, 60);
 }

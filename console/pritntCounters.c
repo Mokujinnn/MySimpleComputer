@@ -1,4 +1,5 @@
 #include "mySimpleComputer.h"
+#include <unistd.h>
 
 void
 printCounters ()
@@ -9,5 +10,5 @@ printCounters ()
   sc_icounterGet (&value);
 
   snprintf (&str[5], 5, "%.4x", value);
-  fwrite (str, 1, 10, stdout);
+  write(STDOUT_FILENO, str, 10);
 }
