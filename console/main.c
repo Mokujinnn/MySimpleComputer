@@ -5,6 +5,8 @@
 
 int main()
 {
+	sc_regInit();
+
 	int value = 0;
 	sc_memoryInit();
 
@@ -14,7 +16,10 @@ int main()
 
 	sc_memorySet(0, value);
 
-	printCell(0);
+	// printCell(0);
+
+	printFlags();
+
 
 	return 0;
 }
