@@ -93,26 +93,3 @@ int sc_icounterGet (int * value)
     *value = INST_COUNTER;
     return 0;
 }
-
-int main()
-{
-
-    sc_accumulatorInit();
-    sc_icounterInit();
-    sc_regInit();
-
-
-    sc_accumulatorSet(10);
-    sc_icounterSet(222);
-    sc_regSet(ON, 999);
-
-    int acc, icnt, fl;
-
-    sc_accumulatorGet(&acc);
-    sc_icounterGet(&icnt);
-    sc_regGet(ON, &fl);
-
-    printf("%d, %d, %d\n", acc, icnt, fl);
-
-    return 0;
-}
