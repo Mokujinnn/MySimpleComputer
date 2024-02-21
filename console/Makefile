@@ -1,4 +1,4 @@
 all: main
 
 main: test.c
-	gcc test.c -o $@
+	$(CC) test.c -o app
