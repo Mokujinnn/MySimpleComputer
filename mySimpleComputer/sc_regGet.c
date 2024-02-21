@@ -2,13 +2,12 @@
 
 int sc_regGet(int reg, int *value)
 {
-    switch (reg)
+    if (!(reg >= 0 && reg < NUMBER_OF_FLAGS) || !value)
     {
-    case ON:
-        *value = REG_FLAG;
-        return 0;
-    
-    default:
         return -1;
     }
+
+    *value = (REG_FLAG >> reg) & 1;
+
+    return 0;
 }

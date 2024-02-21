@@ -2,5 +2,5 @@
 
 void sc_regInit()
 {
-    REG_FLAG = 0;
+    REG_FLAG = 0x10; // bin: 10000
 }
