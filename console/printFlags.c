@@ -1,6 +1,6 @@
 #include "mySimpleComputer.h"
 
-void printFlags ()
+void printFlags()
 {
-    sc_
+    
 }
