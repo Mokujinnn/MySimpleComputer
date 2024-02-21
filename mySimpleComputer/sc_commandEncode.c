@@ -5,7 +5,7 @@ int sc_commandEncode(int sign, int command, int operand, int * value)
         return -1;
     }
     
-    *value = ((command << 8) | (sign << 15)) | operand;
+    *value = ((command << 7) | (sign << 14)) | operand;
 
     return 0;
 }

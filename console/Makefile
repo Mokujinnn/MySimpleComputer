@@ -2,24 +2,25 @@ CC = gcc
 CFLAGS = -Wall
 INCLUDEDIR = ../include/
 
-LIB = -lmySimpleComputer-d
+LIB = -lmySimpleComputer
 LIBDIR = ../mySimpleComputer
 
+LIBDEPENDANCE = ../mySimpleComputer/libmySimpleComputer.a
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 
 TARGET = pr01
 
-all:$(SRC) $(TARGET) $(EXE)
+all:$(SRC) $(TARGET) $(EXE) 
 
-$(TARGET): $(OBJ)
+$(TARGET): $(OBJ) $(LIBDEPENDANCE)
 	$(CC) -o $@ $(OBJ) -L$(LIBDIR) $(LIB)  
 	
 
 
 %.o: %.c
-	$(CC) $(CFLAGS) $< -c -o $@ -I$(INCLUDEDIR) -g -O0
+	$(CC) $(CFLAGS) $< -c -o $@ -I$(INCLUDEDIR)
 
 
 rm:
