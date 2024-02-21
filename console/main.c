@@ -9,16 +9,16 @@ int main()
 	sc_accumulatorInit();
 	sc_icounterInit();
 
-	sc_accumulatorSet(1527);
+	// sc_accumulatorSet(1527);
 
-	int value = 0;
-	sc_memoryInit();
+	// int value = 0;
+	// sc_memoryInit();
 
-	sc_commandEncode(1, 15, 1, &value);
+	// sc_commandEncode(1, 15, 1, &value);
 
-	printf("%d\n", value);
+	// printf("%d\n", value);
 
-	sc_memorySet(0, value);
+	// sc_memorySet(0, value);
 
 	// printCell(0);
 
@@ -28,9 +28,14 @@ int main()
 
 	// printAccumulator();
 
-	sc_icounterSet(1000);
+	// sc_icounterSet(1000);
 
-	printCounters();
+	// printCounters();
+
+	sc_regSet(OUTMEM, 1);
+	sc_regSet(IGNORE_INTERRUPT, 0);
+
+	printFlags();
 
 	return 0;
 }

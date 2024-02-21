@@ -9,6 +9,7 @@ CFLAGS = -Wall
 # ##
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
+HEADER = sc_variables.h
 
 TARGET = libmySimpleComputer.a
 # EXE = app
@@ -23,7 +24,7 @@ $(TARGET): $(OBJ)
 	
 
 
-%.o: %.c
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) $< -c -o $@
 
 
