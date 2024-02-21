@@ -1,6 +1,8 @@
 #ifndef SC_VARIABLES_H
 #define SC_VARIABLES_H
 
+#include <stdio.h>
+
 enum SIZE
 {
 	SIZEMEM = 128
