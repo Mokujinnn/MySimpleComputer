@@ -6,6 +6,9 @@
 int main()
 {
 	sc_regInit();
+	sc_accumulatorInit();
+
+	sc_accumulatorSet(1527);
 
 	int value = 0;
 	sc_memoryInit();
@@ -20,7 +23,9 @@ int main()
 
 	// printFlags();
 
-	printDecodedCommand(127);
+	// printDecodedCommand(127);
+
+	printAccumulator();
 
 	return 0;
 }

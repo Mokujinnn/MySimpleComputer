@@ -14,7 +14,7 @@ void printCell (int address)
     sc_commandDecode(value, &sign, &command, &operand);
 
     str[0] = sign == 0 ? '+' : '-';
+    
     snprintf(&str[1], 5, "%.2x%.2x", command, operand);
-
     fwrite(str, 1, 6, stdout);
 }
