@@ -1,22 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-#include <mySimpleComputer.h>
-
-enum
-{
-	SIZEMEM = 128
-};
-
-int MEM[SIZEMEM];
-
-void printMEM()
-{
-	for (int i = 0; i < SIZEMEM; ++i)
-	{
-		printf("Num: %3d Value: %5d\n", i, MEM[i]);
-	}
-}
+#include "sc_variables.h"
 
 void sc_memoryInit()
 {
@@ -74,17 +58,6 @@ int sc_memoryLoad(char *filename)
 	fread(MEM, sizeof(int), SIZEMEM, fp);
 
 	fclose(fp);
-
-	return 0;
-}
-
-int main()
-{
-	sc_memoryInit();
-
-	sc_memoryLoad("memory");
-
-	printMEM();
 
 	return 0;
 }
