@@ -9,7 +9,7 @@ LIBDIR = ../mySimpleComputer
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 
-TARGET = app
+TARGET = pr01
 
 all:$(SRC) $(TARGET) $(EXE)
 
