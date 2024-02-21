@@ -20,3 +20,6 @@ $(EXE): $(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) $< -c -o $@ -I'$(INCLUDEDIR)'
 
+
+rm:
+	rm -rf $(OBJ)
