@@ -17,5 +17,5 @@ printFlags ()
         }
     }
 
-  write(STDOUT_FILENO, str, 10);
+  write (STDOUT_FILENO, str, 10);
 }

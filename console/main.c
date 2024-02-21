@@ -16,7 +16,7 @@ printMem ()
   for (int i = 0; i < SIZEMEM; ++i)
     {
       printCell (i);
-      write(STDOUT_FILENO, " ", 1);
+      write (STDOUT_FILENO, " ", 1);
 
       if ((i + 1) % 10 == 0)
         {

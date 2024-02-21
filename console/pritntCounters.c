@@ -10,5 +10,5 @@ printCounters ()
   sc_icounterGet (&value);
 
   snprintf (&str[5], 5, "%.4x", value);
-  write(STDOUT_FILENO, str, 10);
+  write (STDOUT_FILENO, str, 10);
 }

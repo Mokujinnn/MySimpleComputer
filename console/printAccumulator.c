@@ -18,5 +18,5 @@ printAccumulator ()
   str[4] = sign == 0 ? '+' : '-';
 
   snprintf (&str[5], 15, "%.2x%.2x hex: %.4x", command, operand, value);
-  write(STDOUT_FILENO, str, 21);
+  write (STDOUT_FILENO, str, 21);
 }
