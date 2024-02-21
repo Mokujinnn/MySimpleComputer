@@ -7,7 +7,7 @@ INCLUDEDIR = ../include/
 OBJDIR = ../obj/
 
 # ##
-SRC = sc_variables.c
+SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 
 EXE = app
