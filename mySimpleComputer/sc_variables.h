@@ -19,13 +19,13 @@ extern int REG_FLAG;
 
 // Flag registers
 
-enum FLAGS     //Default state:
+enum FLAGS
 {
-    OWERFLOW = 0,            // 0
-    DIVISION_BY_ZERO,        // 0
-    OUTMEM,                  // 0
-    WRONG_COMMAND,           // 0
-    IGNORE_INTERRUPT,        // 1  
+    OWERFLOW = 0,            //Default state: 0
+    DIVISION_BY_ZERO,        //Default state: 0
+    OUTMEM,                  //Default state: 0
+    WRONG_COMMAND,           //Default state: 0
+    IGNORE_INTERRUPT,        //Default state: 1  
 
     NUMBER_OF_FLAGS
 };

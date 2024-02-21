@@ -1,10 +1,7 @@
-ASD = gcc
-CFLAGS = -Wall
 
-INCLUDEDIR = ../include/
-OBJDIR = ../obj/
+all:
+	$(MAKE) -C mySimpleComputer
 
-all: console
 
-console: console/test.c
-	$(MAKE) -C console
+rm: 
+	$(MAKE) rm -C mySimpleComputer

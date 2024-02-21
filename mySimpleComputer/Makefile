@@ -3,7 +3,7 @@
 CC = gcc
 CFLAGS = -Wall
 
-INCLUDEDIR = ../include/
+# INCLUDEDIR = ../include/
 # OBJDIR = obj/
 
 # ##
@@ -11,12 +11,12 @@ SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 
 TARGET = libmySimpleComputer.a
-EXE = app
+# EXE = app
 
 all:$(SRC) $(TARGET) $(EXE)
 
-$(EXE): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ)
+# $(EXE): $(OBJ)
+# 	$(CC) $(CFLAGS) -o $@ $(OBJ)
 
 $(TARGET): $(OBJ)
 	ar -rcs $@ $(OBJ) 
@@ -24,7 +24,7 @@ $(TARGET): $(OBJ)
 
 
 %.o: %.c
-	$(CC) $(CFLAGS) $< -c -o $@ -I$(INCLUDEDIR)
+	$(CC) $(CFLAGS) $< -c -o $@
 
 
 rm:
