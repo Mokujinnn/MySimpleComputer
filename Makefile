@@ -1,6 +1,8 @@
-CC = gcc
+ASD = gcc
+CFLAGS = -Wall
 
-includeDir = ../include/
+INCLUDEDIR = ../include/
+OBJDIR = ../obj/
 
 all: console
 
