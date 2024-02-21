@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall
 INCLUDEDIR = ../include/
 
-LIB = mySimpleComputer
+LIB = -lmySimpleComputer-d
 LIBDIR = ../mySimpleComputer
 
 
@@ -14,12 +14,12 @@ TARGET = main
 all:$(SRC) $(TARGET) $(EXE)
 
 $(TARGET): $(OBJ)
-	$(CC) -o $@ $(OBJ) -L$(LIBDIR) -l$(LIB)
+	$(CC) -o $@ $(OBJ) -L$(LIBDIR) $(LIB)  
 	
 
 
 %.o: %.c
-	$(CC) $(CFLAGS) $< -c -o $@ -I$(INCLUDEDIR)
+	$(CC) $(CFLAGS) $< -c -o $@ -I$(INCLUDEDIR) -g -O0
 
 
 rm:

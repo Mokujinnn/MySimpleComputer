@@ -18,8 +18,9 @@ int main()
 
 	// printCell(0);
 
-	printFlags();
+	// printFlags();
 
+	printDecodedCommand(127);
 
 	return 0;
 }
