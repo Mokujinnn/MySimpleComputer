@@ -1,16 +1,26 @@
 #ifndef SC_VAR
 #define SC_VAR
 
-enum
+enum SIZE
 {
 	SIZEMEM = 128
 };
 
 extern int MEM[SIZEMEM];
 
-extern int REG_ACC;
+// Flag registers
+
+enum FLAGS
+{
+    ON,
+    OFF
+};
+
+// Flag registrers end
+
+extern int ACC;
 extern size_t INST_COUNTER;
 extern int REG_FLAG;
 
 
-#endif
+#endif 

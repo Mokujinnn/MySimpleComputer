@@ -3,6 +3,6 @@
 
 int MEM[SIZEMEM];
 
-int REG_ACC; 
+int ACC; 
 size_t INST_COUNTER;
 int REG_FLAG;
