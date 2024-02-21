@@ -1,5 +1,5 @@
-#ifndef SC_VAR
-#define SC_VAR
+#ifndef SC_VARIABLES_H
+#define SC_VARIABLES_H
 
 enum SIZE
 {
@@ -23,4 +23,4 @@ extern size_t INST_COUNTER;
 extern int REG_FLAG;
 
 
-#endif 
+#endif // SC_VARIABLES_H
