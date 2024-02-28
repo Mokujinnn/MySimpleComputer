@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int mt_clrscr ()
+void mt_clrscr ()
 {
     printf("\E[H\E[2J");
 }
