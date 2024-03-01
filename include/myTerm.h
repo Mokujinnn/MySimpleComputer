@@ -22,5 +22,8 @@ int mt_getscreensize (int * rows, int * cols);
 int mt_gotoXY (int x, int y);
 int mt_setbgcolor (enum colors color);
 int mt_setfgcolor (enum colors color);
+int mt_setdefaultcolor (void);
+int mt_setcursorvisible (int value);
+int mt_delline (void);
 
 #endif // MY_TERM_H

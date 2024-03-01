@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <unistd.h>
 
-void mt_clrscr ()
+int mt_clrscr()
 {
-    printf("\E[H\E[2J");
+    write(STDOUT_FILENO, "\E[H\E[2J", 8);
+    return 0;
 }
