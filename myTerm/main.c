@@ -5,7 +5,10 @@
 int main()
 {
     mt_clrscr();
-    mt_gotoXY(2, 15);
+    mt_gotoXY(15, 2);
+    mt_setbgcolor(DarkCyan);
+    mt_setfgcolor(DarkRed);
+    printf("ASD");
 
     return 0;
 }

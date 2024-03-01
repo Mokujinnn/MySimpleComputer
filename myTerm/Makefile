@@ -4,7 +4,7 @@ CFLAGS = -Wall
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 HEADER = ../include/myTerm.h
-INCLUDEDIR = ../include
+INCLUDEDIR = ../include/
 
 TARGET = app
 
