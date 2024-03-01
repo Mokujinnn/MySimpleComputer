@@ -14,6 +14,8 @@ int main()
     mt_setdefaultcolor();
     mt_gotoXY(15, 3);
     write (STDOUT_FILENO, "ASD", 4);
+    // mt_delline();
+    // mt_setcursorvisible(0);
 
     return 0;
 }

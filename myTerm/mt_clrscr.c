@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <unistd.h>
 
 int mt_clrscr()
