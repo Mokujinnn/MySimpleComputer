@@ -1,16 +1,11 @@
 #include <stdio.h>
 
-int mt_clrscr();
-int mt_getscreensize (int * rows, int * cols);
-
+#include "myTerm.h"
 
 int main()
 {
     mt_clrscr();
-    int x, y;
-    mt_getscreensize(&x, &y);
-
-    printf("%d %d\n", x, y);
+    mt_gotoXY(2, 15);
 
     return 0;
 }

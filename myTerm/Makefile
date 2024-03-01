@@ -3,7 +3,8 @@ CFLAGS = -Wall
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
-# HEADER = sc_variables.h
+HEADER = ../include/myTerm.h
+INCLUDEDIR = ../include
 
 TARGET = app
 
@@ -15,7 +16,7 @@ $(TARGET): $(OBJ)
 	
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) $< -c -o $@
+	$(CC) $(CFLAGS) $< -c -o $@ -I$(INCLUDEDIR)
 
 rm:
 	rm -rf $(OBJ)

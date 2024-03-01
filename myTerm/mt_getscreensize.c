@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <sys/ioctl.h>
-// #include <termios.h>
 #include <unistd.h>
 
 int mt_getscreensize (int * rows, int * cols)
@@ -15,6 +14,6 @@ int mt_getscreensize (int * rows, int * cols)
 
     *rows = ts.ws_row;
     *cols = ts.ws_col;
-    
+
     return 0;
 }
