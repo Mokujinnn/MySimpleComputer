@@ -6,8 +6,11 @@ int mt_getscreensize (int * rows, int * cols);
 
 int main()
 {
-    // mt_clrscr();
+    mt_clrscr();
     int x, y;
-    mt_getscreensize(x, y);
+    mt_getscreensize(&x, &y);
+
+    printf("%d %d\n", x, y);
+
     return 0;
 }

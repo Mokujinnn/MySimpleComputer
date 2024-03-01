@@ -13,5 +13,8 @@ int mt_getscreensize (int * rows, int * cols)
     struct winsize ts;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &ts);
 
-    printf("%d %d\n", ts.ws_col, ts.ws_row);
+    *rows = ts.ws_row;
+    *cols = ts.ws_col;
+    
+    return 0;
 }
