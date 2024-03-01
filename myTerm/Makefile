@@ -6,13 +6,13 @@ OBJ = $(SRC:.c=.o)
 HEADER = ../include/myTerm.h
 INCLUDEDIR = ../include/
 
-TARGET = app
+TARGET = libmyTerm.a
 
 all:$(SRC) $(TARGET) $(EXE)
 
 
 $(TARGET): $(OBJ)
-	$(CC) -o $@ $^
+	ar -rcs $@ $^
 	
 
 %.o: %.c $(HEADER)
