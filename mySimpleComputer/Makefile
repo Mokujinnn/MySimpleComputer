@@ -11,8 +11,7 @@ all:$(SRC) $(TARGET) $(EXE)
 
 
 $(TARGET): $(OBJ)
-	ar -rcs $@ $(OBJ) 
-	
+	ar -rcs $@ $^
 
 
 %.o: %.c $(HEADER)
