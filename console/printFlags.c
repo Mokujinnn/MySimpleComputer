@@ -1,5 +1,7 @@
-#include "mySimpleComputer.h"
 #include <unistd.h>
+
+#include "mySimpleComputer.h"
+#include "myTerm.h"
 
 void
 printFlags ()
@@ -17,5 +19,6 @@ printFlags ()
         }
     }
 
+  mt_gotoXY(86, 2);
   write (STDOUT_FILENO, str, 10);
 }

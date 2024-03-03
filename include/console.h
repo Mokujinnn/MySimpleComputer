@@ -1,7 +1,9 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
-void printCell (int address);
+#include "myTerm.h"
+
+void printCell (int address, enum colors fg, enum colors bg);
 void printFlags ();
 void printDecodedCommand (int value);
 void printAccumulator ();

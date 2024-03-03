@@ -6,24 +6,12 @@
 #include "mySimpleComputer.h"
 
 void
-printMem ()
+InitMem ()
 {
   for (int i = 0; i < rand () % SIZEMEM; ++i)
     {
       sc_memorySet (i, rand () % 10000);
     }
-
-  for (int i = 0; i < SIZEMEM; ++i)
-    {
-      printCell (i);
-      write (STDOUT_FILENO, " ", 1);
-
-      if ((i + 1) % 10 == 0)
-        {
-          printf ("\n");
-        }
-    }
-  printf ("\n");
 }
 
 int
@@ -33,67 +21,23 @@ main ()
   sc_accumulatorInit ();
   sc_icounterInit ();
 
-  printMem ();
+  InitMem();
 
-  printf ("\n");
-  if (sc_memorySet (100, 1000000) == -1)
-    {
-      printf ("Incorect value\n");
-    }
-  printf ("\n");
+  mt_clrscr();
+  for (int i = 0; i < SIZEMEM; ++i)
+  {
+    printCell(i, BackgroundDefault, ForegroundDefault);
+  }
 
-  sc_regSet (OWERFLOW, 1);
-  sc_regSet (DIVISION_BY_ZERO, 0);
-  sc_regSet (OUTMEM, 1);
-  sc_regSet (WRONG_COMMAND, 0);
-  sc_regSet (IGNORE_INTERRUPT, 1);
+  sc_accumulatorSet(1234);
+  sc_icounterSet(2234);
+  
+  printFlags();
+  printDecodedCommand(12712);
+  printAccumulator();
+  printCounters();
 
-  printFlags ();
-  printf ("\n");
-
-  printf ("\n");
-  if (sc_regSet (OUTMEM, 1000) == -1)
-    {
-      printf ("Incorect value\n");
-    }
-  printf ("\n");
-
-  sc_accumulatorSet (1000);
-  printAccumulator ();
-  printf ("\n");
-
-  printf ("\n");
-  if (sc_accumulatorSet (1000000) == -1)
-    {
-      printf ("Incorect value\n");
-    }
-  printf ("\n");
-
-  sc_icounterSet (1234);
-  printCounters ();
-  printf ("\n");
-
-  printf ("\n");
-  if (sc_icounterSet (-10) == -1)
-    {
-      printf ("Incorect value\n");
-    }
-  printf ("\n");
-
-  int valuemem = 0;
-  int valueacc = 0;
-
-  sc_memoryGet (0, &valuemem);
-  printDecodedCommand (valuemem);
-  printf ("\n");
-
-  sc_accumulatorGet (&valueacc);
-  printDecodedCommand (valueacc);
-  printf ("\n");
-
-  sc_commandEncode (1, 99, 101, &valuemem);
-  printDecodedCommand (valuemem);
-  printf ("\n");
+  mt_gotoXY(1, 20);
 
   return 0;
 }
