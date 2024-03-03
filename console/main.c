@@ -17,7 +17,7 @@ InitMem ()
 int
 main ()
 {
-  sc_regInit ();
+  // sc_regInit ();
   sc_accumulatorInit ();
   sc_icounterInit ();
 
@@ -36,6 +36,13 @@ main ()
   printDecodedCommand(12712);
   printAccumulator();
   printCounters();
+  
+  for (int i = 0; i < 7; i++)
+  {
+    printTerm(i, 0);
+    getchar();
+  }
+  
 
   mt_gotoXY(1, 20);
 
