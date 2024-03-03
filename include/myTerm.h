@@ -3,18 +3,26 @@
 
 enum colors
 {
-    Black = 0,
-    DarkRed,
-    DarkGreen,
-    DarkYellow,
-    DarkBlue,
-    DarkMagenta,
-    DarkCyan,
-    LightGray,
-    Default = 9,
+    ForegroundBlack = 30,
+    ForegroundDarkRed,
+    ForegroundDarkGreen,
+    ForegroundDarkYellow,
+    ForegroundDarkBlue,
+    ForegroundDarkMagenta,
+    ForegroundDarkCyan,
+    ForegroundLightGray,
+    ForegroundDefault = 39,
 
-    Foreground = 30,
-    Background = 40
+    BackgroundBlack = 40,
+    BackgroundDarkRed,
+    BackgroundDarkGreen,
+    BackgroundDarkYellow,
+    BackgroundDarkBlue,
+    BackgroundDarkMagenta,
+    BackgroundDarkCyan,
+    BackgroundLightGray,
+    BackgroundDefault = 49
+
 };
 
 int mt_clrscr();
