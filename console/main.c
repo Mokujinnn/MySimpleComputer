@@ -17,7 +17,7 @@ InitMem ()
 int
 main ()
 {
-  // sc_regInit ();
+  sc_regInit ();
   sc_accumulatorInit ();
   sc_icounterInit ();
 

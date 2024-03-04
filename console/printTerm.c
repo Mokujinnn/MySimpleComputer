@@ -25,12 +25,12 @@ void printTerm (int address, int input)
     {
         sc_memoryGet(address, &value);
         sc_commandDecode (value, &sign, &command, &operand);
-        snprintf(slider[0], 10, "%.2x> %.2x%.2x", address, command, operand);
+        snprintf(slider[0], 10, "%.2x< %.2x%.2x", address, command, operand);
     }
     
     for (int i = 0; i < 5; i++)
     {
-        mt_gotoXY(65, 20 + i);
+        mt_gotoXY(65, 25 - i);
         write(STDOUT_FILENO, slider[i], 10);
     }
 }
