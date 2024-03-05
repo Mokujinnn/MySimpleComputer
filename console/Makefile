@@ -9,10 +9,11 @@ LIBDEPENDANCE = ../libs/libmySimpleComputer.a ../libs/libmyTerm.a
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
+HEADER = $(wildcard ../include/*.h)
 
 TARGET = pr03
 
-all:$(SRC) $(TARGET) $(EXE) 
+all:$(SRC) $(TARGET)
 
 $(TARGET): $(OBJ) $(LIBDEPENDANCE)
 	$(CC) -o $@ $(OBJ) -L$(LIBDIR) $(LIB)  
@@ -22,7 +23,7 @@ $(LIBDEPENDANCE): ../mySimpleComputer/libmySimpleComputer.a ../myTerm/libmyTerm.
 	cp ../myTerm/libmyTerm.a ../libs/libmyTerm.a
 
 
-%.o: %.c
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) $< -c -o $@ -I$(INCLUDEDIR)
 
 

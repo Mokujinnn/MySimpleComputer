@@ -7,7 +7,7 @@ HEADER = sc_variables.h
 
 TARGET = libmySimpleComputer.a
 
-all:$(SRC) $(TARGET) $(EXE)
+all:$(SRC) $(TARGET)
 
 
 $(TARGET): $(OBJ)

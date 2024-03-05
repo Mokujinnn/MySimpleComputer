@@ -8,7 +8,7 @@ INCLUDEDIR = ../include/
 
 TARGET = libmyTerm.a
 
-all:$(SRC) $(TARGET) $(EXE)
+all:$(SRC) $(TARGET)
 
 
 $(TARGET): $(OBJ)

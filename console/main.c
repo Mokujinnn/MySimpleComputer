@@ -5,45 +5,55 @@
 #include "console.h"
 #include "mySimpleComputer.h"
 
-void
-InitMem ()
+void InitMem()
 {
-  for (int i = 0; i < rand () % SIZEMEM; ++i)
-    {
-      sc_memorySet (i, rand () % 10000);
-    }
+  sc_memoryInit();
+  for (int i = 0; i < rand() % SIZEMEM; ++i)
+  {
+    sc_memorySet(i, rand() % 10000);
+  }
+
+  sc_regInit();
+  sc_accumulatorInit();
+  sc_icounterInit();
 }
 
-int
-main ()
+int main()
 {
-  sc_regInit ();
-  sc_accumulatorInit ();
-  sc_icounterInit ();
+  int rows = 0;
+  int cols = 0;
+
+  mt_getscreensize(&rows, &cols);
+
+  mt_clrscr();
+  if (!(90 < cols && 26 < rows))
+  {
+    printf("Small terminal size\n");
+    return 0;
+  }
 
   InitMem();
 
-  mt_clrscr();
   for (int i = 0; i < SIZEMEM; ++i)
   {
-    printCell(i, BackgroundDefault, ForegroundDefault);
+    printCell(i, ForegroundDefault, BackgroundDefault);
   }
+  printCell(55, ForegroundBlack, BackgroundLightGray);
 
   sc_accumulatorSet(1234);
   sc_icounterSet(2234);
-  
+
   printFlags();
   printDecodedCommand(12712);
   printAccumulator();
   printCounters();
   printCommand();
-  
+
   for (int i = 0; i < 7; i++)
   {
     printTerm(i, 0);
     getchar();
   }
-  
 
   mt_gotoXY(1, 20);
 
