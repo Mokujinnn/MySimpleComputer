@@ -13,6 +13,6 @@ printCounters ()
 
   snprintf (&str[5], 5, "%.4x", value);
 
-  mt_gotoXY(63, 5);
+  mt_gotoXY (63, 5);
   write (STDOUT_FILENO, str, 10);
 }

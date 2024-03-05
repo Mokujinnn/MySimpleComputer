@@ -4,7 +4,8 @@
 #include "mySimpleComputer.h"
 #include "myTerm.h"
 
-void printCell (int address, enum colors fg, enum colors bg)
+void
+printCell (int address, enum colors fg, enum colors bg)
 {
   int value = 0;
   int sign = 0;
@@ -21,10 +22,10 @@ void printCell (int address, enum colors fg, enum colors bg)
 
   snprintf (&str[1], 5, "%.2x%.2x", command, operand);
 
-  mt_setbgcolor(bg);
-  mt_setfgcolor(fg);
-  mt_gotoXY(2 + colmn, 2 + line);
+  mt_setbgcolor (bg);
+  mt_setfgcolor (fg);
+  mt_gotoXY (2 + colmn, 2 + line);
 
   write (STDOUT_FILENO, str, 6);
-  mt_setdefaultcolor();
+  mt_setdefaultcolor ();
 }

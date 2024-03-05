@@ -19,6 +19,6 @@ printDecodedCommand (int value)
   snprintf (str, 60, "dec: %.5d | oct: %.6o | hex: %.4x | bin: %s", value,
             value, value, bin);
 
-  mt_gotoXY(2, 17);
+  mt_gotoXY (2, 17);
   write (STDOUT_FILENO, str, 60);
 }

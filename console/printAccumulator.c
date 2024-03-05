@@ -20,6 +20,6 @@ printAccumulator ()
 
   snprintf (&str[5], 15, "%.2x%.2x hex: %.4x", command, operand, value);
 
-  mt_gotoXY(63, 2);
+  mt_gotoXY (63, 2);
   write (STDOUT_FILENO, str, 21);
 }
