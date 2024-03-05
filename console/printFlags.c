@@ -19,6 +19,6 @@ printFlags ()
         }
     }
 
-  mt_gotoXY(86, 2);
+  mt_gotoXY(88, 2);
   write (STDOUT_FILENO, str, 10);
 }
