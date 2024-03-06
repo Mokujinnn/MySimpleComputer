@@ -12,7 +12,7 @@ enum SIZE
 
 extern int MEM[SIZEMEM];
 extern int ACC;
-extern size_t INST_COUNTER;
+extern int INST_COUNTER;
 extern int REG_FLAG;
 
 #endif // SC_PUBLIC_INTERFACE

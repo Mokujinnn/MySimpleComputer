@@ -4,5 +4,5 @@
 int MEM[SIZEMEM];
 
 int ACC;
-size_t INST_COUNTER;
+int INST_COUNTER;
 int REG_FLAG;
