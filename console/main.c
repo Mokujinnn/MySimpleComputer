@@ -25,6 +25,12 @@ main ()
   int rows = 0;
   int cols = 0;
 
+  if (!ttyname (STDOUT_FILENO))
+  {
+    printf ("Output stream is not a terminal\n");
+    return 0;
+  }
+
   mt_getscreensize (&rows, &cols);
 
   mt_clrscr ();

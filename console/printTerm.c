@@ -31,7 +31,7 @@ printTerm (int address, int input)
 
   for (int i = 0; i < 5; i++)
     {
-      mt_gotoXY (65, 25 - i);
+      mt_gotoXY (65, 20 + i);
       write (STDOUT_FILENO, slider[i], 10);
     }
 }
