@@ -26,10 +26,10 @@ main ()
   int cols = 0;
 
   if (!ttyname (STDOUT_FILENO))
-  {
-    printf ("Output stream is not a terminal\n");
-    return 0;
-  }
+    {
+      printf ("Output stream is not a terminal\n");
+      return 0;
+    }
 
   mt_getscreensize (&rows, &cols);
 
