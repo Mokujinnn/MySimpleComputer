@@ -1,10 +1,10 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -g -O0 
 
 INCLUDEDIR = ../include/
 
-LIB = -lmyTerm
-LIBDIR = -L./
+LIB = -lmyTerm-d
+LIBDIR = -L../libs
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
@@ -12,7 +12,7 @@ HEADER = $(wildcard ../include/*.h)
 
 TARGET = app
 
-all:$(SRC) $(TARGET)
+all:$(TARGET)
 
 
 $(TARGET): $(OBJ)
