@@ -1,15 +1,17 @@
 #include <stdio.h>
+#include <unistd.h>
+#include <string.h>
 
 #include "myTerm.h"
 #include "myBigChars.h"
 
-int bc_box(int x1, int y1, int x2, int y2, enum colors box_fg,
-enum colors box_bg, char *header, enum colors header_fg, enum colors header_bg)
+int bc_box(int x1, int y1, int x2, int y2, enum colors box_fg, enum colors box_bg, char *header, enum colors header_fg, enum colors header_bg)
 {
     int rows = 0;
     int cols = 0;
     int i = 0;
     int j = 0;
+    int len = strlen(header);
 
     mt_getscreensize(&rows, &cols);
 
@@ -17,7 +19,9 @@ enum colors box_bg, char *header, enum colors header_fg, enum colors header_bg)
     {
         return -1;
     }
-    
+
+    mt_setbgcolor(box_bg);
+    mt_setfgcolor(box_fg);
     mt_gotoXY(x1, y1);
     bc_printA(CHAR_ULC);
 
@@ -68,5 +72,13 @@ enum colors box_bg, char *header, enum colors header_fg, enum colors header_bg)
             j--;
         }
     }
+
+    mt_setbgcolor(header_bg);
+    mt_setfgcolor(header_fg);
     
+    mt_gotoXY(x1 + ((x2 - x1) / 2) - len/2, y1);
+    write(STDOUT_FILENO, header, len);
+    mt_setdefaultcolor();
+
+    return 0;
 }

@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS = -Wall -g -O0 
+CFLAGS = -Wall #-g -O0 
 
 INCLUDEDIR = ../include/
 
-LIB = -lmyTerm-d
+LIB = -lmyTerm
 LIBDIR = -L../libs
 
 SRC = $(wildcard *.c)

@@ -5,7 +5,7 @@
 int main(int argc, char const *argv[])
 {
     mt_clrscr();
-    bc_box(2, 2, 10, 10, ForegroundBlack, ForegroundBlack, "asd", ForegroundBlack, ForegroundBlack);
+    bc_box(1, 1, 17, 10, ForegroundDarkCyan, BackgroundDefault, "allllll", ForegroundDarkRed, BackgroundBlack);
     mt_gotoXY(15, 15);
     return 0;
 }
