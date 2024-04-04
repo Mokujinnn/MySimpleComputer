@@ -21,7 +21,8 @@ int bc_printbigchar (int bigchar[ARR_SIZE], int x, int y, enum colors fg, enum c
     {
         for (int j = 0; j < BITS_IN_BYTE; j++)
         {
-            int flag = ((bigchar[i / 4]) >> ((i % 4) * BITS_IN_BYTE + j)) & 1;
+            int flag = 0;
+            bc_getbigcharpos(bigchar, j, i, &flag);
 
             if (flag == 1)
             {
