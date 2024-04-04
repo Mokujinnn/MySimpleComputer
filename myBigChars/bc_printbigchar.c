@@ -8,7 +8,7 @@ int bc_printbigchar (int bigchar[ARR_SIZE], int x, int y, enum colors fg, enum c
 
     mt_getscreensize(&rows, &cols);
 
-    if (x + BITS_IN_BYTE > rows || x + BITS_IN_BYTE > cols)
+    if (x + BITS_IN_BYTE > rows || x + BITS_IN_BYTE > cols || bigchar == NULL)
     {
         return -1;
     }
@@ -36,4 +36,5 @@ int bc_printbigchar (int bigchar[ARR_SIZE], int x, int y, enum colors fg, enum c
         }
     }
     mt_setdefaultcolor();
+    return 0;
 }
