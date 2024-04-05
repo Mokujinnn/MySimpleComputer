@@ -2,6 +2,7 @@
 
 #include "mySimpleComputer.h"
 #include "myTerm.h"
+#include "myBigChars.h"
 
 void
 printCommand ()
@@ -12,6 +13,8 @@ printCommand ()
   int operand = 0;
   char tmp[11] = "+ ";
 
+  bc_box(83, 4, 99, 6, ForegroundDefault, BackgroundDefault, "Comand", ForegroundDarkRed, BackgroundDefault);
+
   sc_icounterGet (&value);
   sc_commandDecode (value, &sign, &command, &operand);
 
@@ -20,6 +23,6 @@ printCommand ()
 
   snprintf (&tmp[3], 10, "%.2x : %.2x", command, operand);
 
-  mt_gotoXY (88, 5);
+  mt_gotoXY (87, 5);
   write (STDOUT_FILENO, tmp, 11);
 }

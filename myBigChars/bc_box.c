@@ -76,7 +76,7 @@ int bc_box(int x1, int y1, int x2, int y2, enum colors box_fg, enum colors box_b
     mt_setbgcolor(header_bg);
     mt_setfgcolor(header_fg);
     
-    mt_gotoXY(x1 + ((x2 - x1) / 2) - len/2, y1);
+    mt_gotoXY(x1 + ((x2 - x1) / 2) + 1 - (len+1)/2, y1);
     write(STDOUT_FILENO, header, len);
     mt_setdefaultcolor();
 

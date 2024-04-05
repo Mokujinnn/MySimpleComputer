@@ -3,6 +3,7 @@
 
 #include "mySimpleComputer.h"
 #include "myTerm.h"
+#include "myBigChars.h"
 
 void
 printTerm (int address, int input)
@@ -12,6 +13,8 @@ printTerm (int address, int input)
   int sign = 0;
   int command = 0;
   int operand = 0;
+
+  bc_box(63, 19, 72, 25, ForegroundDefault, BackgroundDefault, "IN---OUT", ForegroundDarkRed, BackgroundLightGray);
 
   for (int i = 3; i >= 0; i--)
     {
@@ -31,7 +34,7 @@ printTerm (int address, int input)
 
   for (int i = 0; i < 5; i++)
     {
-      mt_gotoXY (65, 20 + i);
+      mt_gotoXY (64, 20 + i);
       write (STDOUT_FILENO, slider[i], 10);
     }
 }
