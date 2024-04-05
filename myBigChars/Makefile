@@ -1,22 +1,18 @@
 CC = gcc
 CFLAGS = -Wall #-g -O0 
 
-INCLUDEDIR = ../include/
-
-LIB = -lmyTerm
-LIBDIR = -L../libs
-
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 HEADER = $(wildcard ../include/*.h)
+INCLUDEDIR = ../include/
 
-TARGET = app
+TARGET = ../libs/libmyBigChars.a
 
 all:$(TARGET)
 
 
 $(TARGET): $(OBJ)
-	$(CC) -o $@ $(OBJ) $(LIBDIR) $(LIB)
+	ar -rcs $@ $^
 
 
 %.o: %.c $(HEADER)

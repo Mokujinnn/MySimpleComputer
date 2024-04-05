@@ -2,14 +2,13 @@ CC = gcc
 CFLAGS = -Wall
 INCLUDEDIR = ../include/
 
-LIB = -lmySimpleComputer -lmyTerm
+LIB = -lmySimpleComputer -lmyTerm -lmyBigChars
 LIBDIR = ../libs/
-
-LIBDEPENDANCE = ../libs/libmySimpleComputer.a ../libs/libmyTerm.a
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 HEADER = $(wildcard ../include/*.h)
+LIBDEPENDANCE = $(wildcard ../libs/*.a)
 
 TARGET = pr03
 
@@ -17,10 +16,6 @@ all:$(SRC) $(TARGET)
 
 $(TARGET): $(OBJ) $(LIBDEPENDANCE)
 	$(CC) -o $@ $(OBJ) -L$(LIBDIR) $(LIB)  
-	
-$(LIBDEPENDANCE): ../mySimpleComputer/libmySimpleComputer.a ../myTerm/libmyTerm.a
-	cp ../mySimpleComputer/libmySimpleComputer.a ../libs/libmySimpleComputer.a
-	cp ../myTerm/libmyTerm.a ../libs/libmyTerm.a
 
 
 %.o: %.c $(HEADER)

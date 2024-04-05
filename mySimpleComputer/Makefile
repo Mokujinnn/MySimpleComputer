@@ -5,7 +5,7 @@ SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 HEADER = sc_variables.h
 
-TARGET = libmySimpleComputer.a
+TARGET = ../libs/libmySimpleComputer.a
 
 all:$(SRC) $(TARGET)
 

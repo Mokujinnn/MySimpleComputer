@@ -6,7 +6,7 @@ OBJ = $(SRC:.c=.o)
 HEADER = ../include/myTerm.h
 INCLUDEDIR = ../include/
 
-TARGET = libmyTerm.a
+TARGET = ../libs/libmyTerm.a
 
 all:$(SRC) $(TARGET)
 
