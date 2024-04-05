@@ -1,0 +1,1 @@
+gcc font.c -o app -L../../libs/ -lmyBigChars -lmyTerm
