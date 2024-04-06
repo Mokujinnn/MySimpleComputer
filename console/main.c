@@ -6,6 +6,20 @@
 #include "mySimpleComputer.h"
 #include "myBigChars.h"
 
+void loadFont(int * bigchar, int n)
+{
+  FILE * f = fopen("font/font.bin", "rb");
+
+  if (f == NULL)
+  {
+    printf("Cant open file with font\n");
+    exit(EXIT_FAILURE);
+  }
+  
+  fread(bigchar, sizeof(int), n * ARR_SIZE, f);
+  fclose(f);
+}
+
 void InitMem()
 {
   sc_memoryInit();
@@ -41,15 +55,16 @@ int CheckOutputStream()
   return 1;
 }
 
-void Init()
+void Init(int * bigchar)
 {
-  InitMem();
+  loadFont(bigchar, 18);
   int status = CheckOutputStream();
-
   if (!status)
   {
     exit(EXIT_FAILURE);
   }
+
+  InitMem();
 }
 
 void printMem()
@@ -63,17 +78,9 @@ void printMem()
   printCell(55, ForegroundBlack, BackgroundLightGray);
 }
 
-int main()
+void printAll()
 {
-  int bigchars[18][2];
-
-  Init();
-
   printMem();
-
-  sc_accumulatorSet(1234);
-  sc_icounterSet(2234);
-
   printFlags();
   printDecodedCommand(12712);
   printAccumulator();
@@ -85,6 +92,27 @@ int main()
     printTerm(i, 0);
     getchar();
   }
+}
+
+int main()
+{
+  int bigchars[18][2];
+
+  Init(*bigchars);
+
+  // for (int i = 0; i < 18; i++)
+  // {
+  //   printf("%d: %x %x\n",i , bigchars[i][0], bigchars[i][1]);
+  // }
+
+  bc_printbigchar(bigchars[1], 1, 1, ForegroundDefault, BackgroundDefault);
+
+  getchar();
+
+  sc_accumulatorSet(1234);
+  sc_icounterSet(2234);
+
+  printAll();
 
   mt_gotoXY(1, 28);
 
