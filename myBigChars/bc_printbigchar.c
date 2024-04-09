@@ -1,5 +1,6 @@
 #include "myTerm.h"
 #include "myBigChars.h"
+#include <stdio.h>
 
 int bc_printbigchar (int bigchar[ARR_SIZE], int x, int y, enum colors fg, enum colors bg)
 {
@@ -8,7 +9,7 @@ int bc_printbigchar (int bigchar[ARR_SIZE], int x, int y, enum colors fg, enum c
 
     mt_getscreensize(&rows, &cols);
 
-    if (x + BITS_IN_BYTE > rows || x + BITS_IN_BYTE > cols || bigchar == NULL)
+    if (x + BITS_IN_BYTE > cols || y + BITS_IN_BYTE > rows || bigchar == NULL)
     {
         return -1;
     }

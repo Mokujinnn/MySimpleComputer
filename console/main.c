@@ -99,15 +99,7 @@ int main()
   int bigchars[18][2];
 
   Init(*bigchars);
-
-  // for (int i = 0; i < 18; i++)
-  // {
-  //   printf("%d: %x %x\n",i , bigchars[i][0], bigchars[i][1]);
-  // }
-
-  bc_printbigchar(bigchars[1], 1, 1, ForegroundDefault, BackgroundDefault);
-
-  getchar();
+  printBigchars(2, bigchars);
 
   sc_accumulatorSet(1234);
   sc_icounterSet(2234);
