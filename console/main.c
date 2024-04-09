@@ -99,7 +99,7 @@ int main()
   int bigchars[18][2];
 
   Init(*bigchars);
-  printBigchars(2, bigchars);
+  printBigCell(2, bigchars);
 
   sc_accumulatorSet(1234);
   sc_icounterSet(2234);

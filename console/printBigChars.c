@@ -1,7 +1,7 @@
 #include "myBigChars.h"
 #include "mySimpleComputer.h"
 
-void printBigchars(int address, int bigchars[18][ARR_SIZE])
+void printBigCell(int address, int bigchars[18][ARR_SIZE])
 {
     int value = 0;
     int sign = 0;

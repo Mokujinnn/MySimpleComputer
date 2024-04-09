@@ -11,6 +11,6 @@ void printAccumulator ();
 void printCounters ();
 void printTerm (int address, int input);
 void printCommand ();
-void printBigchars(int address, int bigchars[][ARR_SIZE]);
+void printBigCell(int address, int bigchars[][ARR_SIZE]);
 
 #endif // CONSOLE_H
