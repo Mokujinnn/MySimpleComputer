@@ -9,7 +9,7 @@ printFlags ()
 {
   char str[10] = "P 0 M E T";
 
-  bc_box(83, 1, 99, 3, ForegroundDefault, BackgroundDefault, "Flags", ForegroundDarkRed, BackgroundDefault);
+  bc_box(83, 1, 111, 3, ForegroundDefault, BackgroundDefault, "Flags", ForegroundDarkRed, BackgroundDefault);
   for (int i = 0, k = 1; i < NUMBER_OF_FLAGS; ++i, k *= 2)
     {
       int value = -1;
@@ -21,6 +21,6 @@ printFlags ()
         }
     }
 
-  mt_gotoXY (87, 2);
+  mt_gotoXY (92, 2);
   write (STDOUT_FILENO, str, 10);
 }

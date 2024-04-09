@@ -78,7 +78,7 @@ void printMem()
   printCell(55, ForegroundBlack, BackgroundLightGray);
 }
 
-void printAll()
+void printAll(int bigchars[][ARR_SIZE])
 {
   printMem();
   printFlags();
@@ -86,6 +86,10 @@ void printAll()
   printAccumulator();
   printCounters();
   printCommand();
+  printBigCell(2, bigchars);
+
+  bc_box(1, 19, 62, 25, ForegroundDefault, BackgroundDefault, "Cache", ForegroundDarkRed, BackgroundDefault);
+  bc_box(73, 19, 111, 25, ForegroundDefault, BackgroundDefault, "Keys", ForegroundDarkRed, BackgroundDefault);
 
   for (int i = 0; i < 7; i++)
   {
@@ -104,7 +108,7 @@ int main()
   sc_accumulatorSet(1234);
   sc_icounterSet(2234);
 
-  printAll();
+  printAll(bigchars);
 
   mt_gotoXY(1, 28);
 
