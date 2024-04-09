@@ -1,8 +1,8 @@
 #include <unistd.h>
 
+#include "myBigChars.h"
 #include "mySimpleComputer.h"
 #include "myTerm.h"
-#include "myBigChars.h"
 
 void
 printCommand ()
@@ -13,7 +13,8 @@ printCommand ()
   int operand = 0;
   char tmp[11] = "+ ";
 
-  bc_box(83, 4, 111, 6, ForegroundDefault, BackgroundDefault, "Comand", ForegroundDarkRed, BackgroundDefault);
+  bc_box (83, 4, 111, 6, ForegroundDefault, BackgroundDefault, "Comand",
+          ForegroundDarkRed, BackgroundDefault);
 
   sc_icounterGet (&value);
   sc_commandDecode (value, &sign, &command, &operand);

@@ -1,9 +1,9 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "myBigChars.h"
 #include "mySimpleComputer.h"
 #include "myTerm.h"
-#include "myBigChars.h"
 
 void
 printTerm (int address, int input)
@@ -14,7 +14,8 @@ printTerm (int address, int input)
   int command = 0;
   int operand = 0;
 
-  bc_box(63, 19, 72, 25, ForegroundDefault, BackgroundDefault, "IN---OUT", ForegroundDarkRed, BackgroundLightGray);
+  bc_box (63, 19, 72, 25, ForegroundDefault, BackgroundDefault, "IN---OUT",
+          ForegroundDarkRed, BackgroundLightGray);
 
   for (int i = 3; i >= 0; i--)
     {

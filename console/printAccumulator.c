@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#include "myBigChars.h"
 #include "mySimpleComputer.h"
 #include "myTerm.h"
-#include "myBigChars.h"
 
 void
 printAccumulator ()
@@ -14,7 +14,8 @@ printAccumulator ()
   int operand = 0;
   char str[21] = "sc: ";
 
-  bc_box(62, 1, 82, 3, ForegroundDefault, BackgroundDefault, "Accumulator", ForegroundDarkRed, BackgroundDefault);
+  bc_box (62, 1, 82, 3, ForegroundDefault, BackgroundDefault, "Accumulator",
+          ForegroundDarkRed, BackgroundDefault);
 
   sc_accumulatorGet (&value);
   sc_commandDecode (value, &sign, &command, &operand);

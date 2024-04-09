@@ -10,7 +10,7 @@ OBJ = $(SRC:.c=.o)
 HEADER = $(wildcard ../include/*.h)
 LIBDEPENDANCE = $(wildcard ../libs/*.a)
 
-TARGET = pr03
+TARGET = pr04
 
 all:$(SRC) $(TARGET)
 

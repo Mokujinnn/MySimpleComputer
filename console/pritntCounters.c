@@ -1,8 +1,8 @@
 #include <unistd.h>
 
+#include "myBigChars.h"
 #include "mySimpleComputer.h"
 #include "myTerm.h"
-#include "myBigChars.h"
 
 void
 printCounters ()
@@ -10,7 +10,8 @@ printCounters ()
   int value = 0;
   char str[10] = "IC: +";
 
-  bc_box(62, 4, 82, 6, ForegroundDefault, BackgroundDefault, "InstCounter", ForegroundDarkRed, BackgroundDefault);
+  bc_box (62, 4, 82, 6, ForegroundDefault, BackgroundDefault, "InstCounter",
+          ForegroundDarkRed, BackgroundDefault);
 
   sc_icounterGet (&value);
 

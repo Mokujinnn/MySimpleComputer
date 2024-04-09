@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "myTerm.h"
 #include "myBigChars.h"
+#include "myTerm.h"
 
 void
 printDecodedCommand (int value)
@@ -12,7 +12,8 @@ printDecodedCommand (int value)
 
   int tmp = value;
 
-  bc_box(1, 16, 61, 18, ForegroundDefault, BackgroundDefault, "Curent", ForegroundDarkRed, BackgroundDefault);
+  bc_box (1, 16, 61, 18, ForegroundDefault, BackgroundDefault, "Curent",
+          ForegroundDarkRed, BackgroundDefault);
 
   for (int i = 0; i < 15; ++i)
     {
