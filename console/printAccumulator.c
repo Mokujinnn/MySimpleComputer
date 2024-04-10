@@ -14,7 +14,7 @@ printAccumulator ()
   int operand = 0;
   char str[21] = "sc: ";
 
-  bc_box (62, 1, 82, 3, ForegroundDefault, BackgroundDefault, "Accumulator",
+  bc_box (62, 1, 82, 3, ForegroundDefault, BackgroundDefault, "Аккумулятор",
           ForegroundDarkRed, BackgroundDefault);
 
   sc_accumulatorGet (&value);

@@ -1,8 +1,8 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -g -O0
 INCLUDEDIR = ../include/
 
-LIB = -lmySimpleComputer -lmyTerm -lmyBigChars
+LIB = -lmySimpleComputer-d -lmyTerm-d -lmyBigChars-d
 LIBDIR = ../libs/
 
 SRC = $(wildcard *.c)

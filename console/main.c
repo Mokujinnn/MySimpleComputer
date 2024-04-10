@@ -74,7 +74,7 @@ Init (int *bigchar)
 void
 printMem ()
 {
-  bc_box (1, 1, 61, 15, ForegroundDefault, BackgroundDefault, "Memory",
+  bc_box (1, 1, 61, 15, ForegroundDefault, BackgroundDefault, " Память ",
           ForegroundDarkRed, ForegroundDefault);
 
   for (int i = 0; i < SIZEMEM; ++i)
@@ -95,9 +95,9 @@ printAll (int bigchars[][ARR_SIZE])
   printCommand ();
   printBigCell (2, bigchars);
 
-  bc_box (1, 19, 62, 25, ForegroundDefault, BackgroundDefault, "Cache",
+  bc_box (1, 19, 62, 25, ForegroundDefault, BackgroundDefault, "Кеш Память",
           ForegroundDarkRed, BackgroundDefault);
-  bc_box (73, 19, 111, 25, ForegroundDefault, BackgroundDefault, "Keys",
+  bc_box (73, 19, 111, 25, ForegroundDefault, BackgroundDefault, "Клавиатура",
           ForegroundDarkRed, BackgroundDefault);
 
   for (int i = 0; i < 7; i++)
@@ -123,4 +123,7 @@ main ()
   mt_gotoXY (1, 28);
 
   return 0;
+  // int count = bc_strlen("asd");
+  // int c = strlen("asd");
+  // printf("%d %d\n", count, c);
 }

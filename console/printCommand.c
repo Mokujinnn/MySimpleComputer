@@ -13,7 +13,7 @@ printCommand ()
   int operand = 0;
   char tmp[11] = "+ ";
 
-  bc_box (83, 4, 111, 6, ForegroundDefault, BackgroundDefault, "Comand",
+  bc_box (83, 4, 111, 6, ForegroundDefault, BackgroundDefault, "Команда",
           ForegroundDarkRed, BackgroundDefault);
 
   sc_icounterGet (&value);

@@ -12,8 +12,9 @@ printDecodedCommand (int value)
 
   int tmp = value;
 
-  bc_box (1, 16, 61, 18, ForegroundDefault, BackgroundDefault, "Curent",
-          ForegroundDarkRed, BackgroundDefault);
+  bc_box (1, 16, 61, 18, ForegroundDefault, BackgroundDefault,
+          "Редактируемая ячейка (декодированно)", ForegroundDarkRed,
+          BackgroundDefault);
 
   for (int i = 0; i < 15; ++i)
     {

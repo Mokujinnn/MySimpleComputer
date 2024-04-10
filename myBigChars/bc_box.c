@@ -13,7 +13,8 @@ bc_box (int x1, int y1, int x2, int y2, enum colors box_fg, enum colors box_bg,
   int cols = 0;
   int i = 0;
   int j = 0;
-  int len = strlen (header);
+  int len = bc_strlen (header);
+  int asclen = strlen (header);
 
   mt_getscreensize (&rows, &cols);
 
@@ -78,8 +79,16 @@ bc_box (int x1, int y1, int x2, int y2, enum colors box_fg, enum colors box_bg,
   mt_setbgcolor (header_bg);
   mt_setfgcolor (header_fg);
 
-  mt_gotoXY (x1 + ((x2 - x1) / 2) + 1 - (len + 1) / 2, y1);
-  write (STDOUT_FILENO, header, len);
+  if (asclen == len)
+    {
+      mt_gotoXY (x1 + 1 + ((x2 - x1) / 2) - (asclen + 1) / 2, y1);
+    }
+  else
+    {
+      mt_gotoXY (x1 + 1 + ((x2 - x1) / 2) - (len + 1) / 2, y1);
+    }
+  write (STDOUT_FILENO, header, asclen);
+
   mt_setdefaultcolor ();
 
   return 0;

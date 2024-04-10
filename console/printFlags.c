@@ -9,7 +9,7 @@ printFlags ()
 {
   char str[10] = "P 0 M E T";
 
-  bc_box (83, 1, 111, 3, ForegroundDefault, BackgroundDefault, "Flags",
+  bc_box (83, 1, 111, 3, ForegroundDefault, BackgroundDefault, " Флаги ",
           ForegroundDarkRed, BackgroundDefault);
   for (int i = 0, k = 1; i < NUMBER_OF_FLAGS; ++i, k *= 2)
     {
