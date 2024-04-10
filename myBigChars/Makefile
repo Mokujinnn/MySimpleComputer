@@ -1,22 +1,23 @@
 CC = gcc
-CFLAGS = -Wall -g -O0
+CFLAGS = -Wall -g -O0 
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
-HEADER = ../include/myTerm.h
+HEADER = $(wildcard ../include/*.h)
 INCLUDEDIR = ../include/
 
-TARGET = ../libs/libmyTerm-d.a
+TARGET = ../libs/libmyBigChars-d.a
 
-all:$(SRC) $(TARGET)
+all:$(TARGET)
 
 
 $(TARGET): $(OBJ)
 	ar -rcs $@ $^
-	
+
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) $< -c -o $@ -I$(INCLUDEDIR)
+
 
 rm:
 	rm -rf $(OBJ)

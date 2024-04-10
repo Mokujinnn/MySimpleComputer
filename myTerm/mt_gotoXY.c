@@ -12,8 +12,8 @@ mt_gotoXY (int x, int y)
   mt_getscreensize (&rows, &cols);
   if (x >= 0 && y >= 0 && x < cols && y < rows)
     {
-      char tmp[20] = { 0 };
-      snprintf (tmp, 20, "\E[%d;%dH", y, x);
+      char tmp[25] = { 0 };
+      snprintf (tmp, 25, "\E[%d;%dH", y, x);
       write (STDOUT_FILENO, tmp, 20);
       return 0;
     }

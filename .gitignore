@@ -1,5 +1,7 @@
 *.[oa]
 */pr01
 */pr03
+*/pr04
 .vscode
-*/app
+**/app
+myBigChars/file.txt

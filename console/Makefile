@@ -1,26 +1,21 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -g -O0
 INCLUDEDIR = ../include/
 
-LIB = -lmySimpleComputer -lmyTerm
+LIB = -lmySimpleComputer-d -lmyTerm-d -lmyBigChars-d
 LIBDIR = ../libs/
-
-LIBDEPENDANCE = ../libs/libmySimpleComputer.a ../libs/libmyTerm.a
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 HEADER = $(wildcard ../include/*.h)
+LIBDEPENDANCE = $(wildcard ../libs/*.a)
 
-TARGET = pr03
+TARGET = pr04
 
 all:$(SRC) $(TARGET)
 
 $(TARGET): $(OBJ) $(LIBDEPENDANCE)
 	$(CC) -o $@ $(OBJ) -L$(LIBDIR) $(LIB)  
-	
-$(LIBDEPENDANCE): ../mySimpleComputer/libmySimpleComputer.a ../myTerm/libmyTerm.a
-	cp ../mySimpleComputer/libmySimpleComputer.a ../libs/libmySimpleComputer.a
-	cp ../myTerm/libmyTerm.a ../libs/libmyTerm.a
 
 
 %.o: %.c $(HEADER)

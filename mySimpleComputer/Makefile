@@ -1,11 +1,11 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -g -O0
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 HEADER = sc_variables.h
 
-TARGET = libmySimpleComputer.a
+TARGET = ../libs/libmySimpleComputer-d.a
 
 all:$(SRC) $(TARGET)
 

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#include "myBigChars.h"
 #include "myTerm.h"
 
 void
@@ -10,6 +11,10 @@ printDecodedCommand (int value)
   char str[60] = { 0 };
 
   int tmp = value;
+
+  bc_box (1, 16, 61, 18, ForegroundDefault, BackgroundDefault,
+          "Редактируемая ячейка (декодированно)", ForegroundDarkRed,
+          BackgroundDefault);
 
   for (int i = 0; i < 15; ++i)
     {

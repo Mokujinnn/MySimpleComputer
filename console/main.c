@@ -3,7 +3,23 @@
 #include <unistd.h>
 
 #include "console.h"
+#include "myBigChars.h"
 #include "mySimpleComputer.h"
+
+void
+loadFont (int *bigchar, int n)
+{
+  FILE *f = fopen ("font/font.bin", "rb");
+
+  if (f == NULL)
+    {
+      printf ("Cant open file with font\n");
+      exit (EXIT_FAILURE);
+    }
+
+  fread (bigchar, sizeof (int), n * ARR_SIZE, f);
+  fclose (f);
+}
 
 void
 InitMem ()
@@ -20,7 +36,7 @@ InitMem ()
 }
 
 int
-main ()
+CheckOutputStream ()
 {
   int rows = 0;
   int cols = 0;
@@ -39,31 +55,75 @@ main ()
       printf ("Small terminal size\n");
       return 0;
     }
+  return 1;
+}
+
+void
+Init (int *bigchar)
+{
+  loadFont (bigchar, 18);
+  int status = CheckOutputStream ();
+  if (!status)
+    {
+      exit (EXIT_FAILURE);
+    }
 
   InitMem ();
+}
+
+void
+printMem ()
+{
+  bc_box (1, 1, 61, 15, ForegroundDefault, BackgroundDefault, " Память ",
+          ForegroundDarkRed, ForegroundDefault);
 
   for (int i = 0; i < SIZEMEM; ++i)
     {
       printCell (i, ForegroundDefault, BackgroundDefault);
     }
   printCell (55, ForegroundBlack, BackgroundLightGray);
+}
 
-  sc_accumulatorSet (1234);
-  sc_icounterSet (2234);
-
+void
+printAll (int bigchars[][ARR_SIZE])
+{
+  printMem ();
   printFlags ();
   printDecodedCommand (12712);
   printAccumulator ();
   printCounters ();
   printCommand ();
+  printBigCell (2, bigchars);
+
+  bc_box (1, 19, 62, 25, ForegroundDefault, BackgroundDefault, "Кеш Память",
+          ForegroundDarkRed, BackgroundDefault);
+  bc_box (73, 19, 111, 25, ForegroundDefault, BackgroundDefault, "Клавиатура",
+          ForegroundDarkRed, BackgroundDefault);
 
   for (int i = 0; i < 7; i++)
     {
       printTerm (i, 0);
       getchar ();
     }
+}
 
-  mt_gotoXY (1, 20);
+int
+main ()
+{
+  int bigchars[18][2];
+
+  Init (*bigchars);
+  printBigCell (2, bigchars);
+
+  sc_accumulatorSet (1234);
+  sc_icounterSet (2234);
+
+  printAll (bigchars);
+
+  mt_gotoXY (1, 28);
 
   return 0;
+  // int count = bc_strlen("asd");
+  // int c = strlen("asd");
+  // printf("%d %d\n", count, c);
 }
