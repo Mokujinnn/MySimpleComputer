@@ -1,5 +1,5 @@
-#ifndef KEYS_H
-#define KEYS_H
+#ifndef MY_READ_KEY_H
+#define MY_READ_KEY_H
 
 enum keys
 {
@@ -55,4 +55,6 @@ enum keys
     UNKNOWN
 };
 
-#endif // KEYS_H
+int rk_readkey(enum keys *key);
+
+#endif // MY_READ_KEY_H

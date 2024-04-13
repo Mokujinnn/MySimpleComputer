@@ -1,15 +1,12 @@
-#include <fcntl.h>
-#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 
-#include "keys.h"
+#include "myReadKey.h"
 
 int rk_readkey(enum keys *key)
 {
     char buf[7];
-    int r;
-    r = read(STDIN_FILENO, buf, 6);
+    int r = read(STDIN_FILENO, buf, 6);
     if (r == -1)
     {
         return -1;
@@ -49,19 +46,6 @@ int rk_readkey(enum keys *key)
     //     *key = ESC;    
     else
         *key = UNKNOWN;
-
-    return 0;
-}
-
-int main(int argc, char const *argv[])
-{
-    enum keys key;
-    while (1)
-    {
-        rk_readkey(&key);
-
-        printf("%d\n", key);
-    }
 
     return 0;
 }
