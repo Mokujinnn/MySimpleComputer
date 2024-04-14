@@ -56,5 +56,7 @@ enum keys
 };
 
 int rk_readkey(enum keys *key);
+int rk_mytermsave();
+int rk_mytermrestore();
 
 #endif // MY_READ_KEY_H
