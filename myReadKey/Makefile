@@ -6,13 +6,13 @@ OBJ = $(SRC:.c=.o)
 HEADER = $(wildcard ../include/*.h)
 INCLUDEDIR = ../include/
 
-TARGET = app
+TARGET = ../libs/libmyReadKey-d.a
 
 all:$(TARGET)
 
 
 $(TARGET): $(OBJ)
-	$(CC) -o $@ $^
+	ar -rcs $@ $^
 
 
 %.o: %.c $(HEADER)
