@@ -68,13 +68,13 @@ void Init(int *bigchar)
   InitMem();
 }
 
-void printMem()
+void printMem(int addresOfCurrentCell)
 {
   for (int i = 0; i < SIZEMEM; ++i)
   {
     printCell(i, ForegroundDefault, BackgroundDefault);
   }
-  printCell(55, ForegroundBlack, BackgroundLightGray);
+  printCell(addresOfCurrentCell, ForegroundBlack, BackgroundLightGray);
 }
 
 void printAllBoxes()
@@ -103,34 +103,95 @@ void printAllBoxes()
          ForegroundDarkRed, BackgroundDefault);
 }
 
-void printAll(int bigchars[][ARR_SIZE])
+void UpdateAll(int bigchars[][ARR_SIZE], int addresOfCurrentCell)
 {
-  printMem();
+  printMem(addresOfCurrentCell);
   printFlags();
-  printDecodedCommand(12712);
+  printDecodedCommand(addresOfCurrentCell);
   printAccumulator();
   printCounters();
   printCommand();
-  printBigCell(2, bigchars);
+  printBigCell(addresOfCurrentCell, bigchars);
 
-  for (int i = 0; i < 7; i++)
-  {
-    printTerm(i, 0);
-    getchar();
-  }
+  // for (int i = 0; i < 7; i++)
+  // {
+  printTerm(0, 0);
+  //   getchar();
+  // }
 }
 
 int main()
 {
   int bigchars[18][2];
+  int currentCell = 0;
+  int escIsNotPresed = 1;
   Init(*bigchars);
 
+  mt_setcursorvisible(0);
+
   printAllBoxes();
-  printBigCell(2, bigchars);
 
-  printAll(bigchars);
+  rk_mytermregime(0, 1, 1, 0, 0);
+  UpdateAll(bigchars, currentCell);
 
-  mt_gotoXY(1, 28);
+  while (escIsNotPresed)
+  {
+    enum keys key = -1;
+    rk_readkey(&key);
+
+    switch (key)
+    {
+    case ESC:
+      escIsNotPresed = 0;
+      break;
+    case LEFT:
+      if (currentCell == 120)
+      {
+        currentCell += 7;
+      }
+      else if (currentCell % 10 == 0)
+        currentCell += 9;
+      else
+        currentCell -= 1;
+      break;
+    case RIGHT:
+      if (currentCell == 127)
+      {
+        currentCell -= 7;
+      }
+      else if (currentCell % 10 == 9)
+        currentCell -= 9;
+      else
+        currentCell += 1;
+      break;
+    case UP:
+      if (currentCell == 8 || currentCell == 9)
+      {
+        currentCell += 110;
+      }
+      else if (currentCell < 10)
+        currentCell += 120;
+      else
+        currentCell -= 10;
+      break;
+    case DOWN:
+      if (currentCell == 118 || currentCell == 119)
+      {
+        currentCell -= 110;
+      }
+      else if (currentCell > 119)
+        currentCell -= 120;
+      else
+        currentCell += 10;
+      break;
+    default:
+      break;
+    }
+
+    UpdateAll(bigchars, currentCell);
+  }
+
+  mt_setcursorvisible(1);
 
   return 0;
 }
