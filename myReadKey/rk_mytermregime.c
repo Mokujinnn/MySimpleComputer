@@ -14,31 +14,17 @@ int rk_mytermregime(int regime, int vtime, int vmin, int echo, int sigint)
     if (regime == 0)
     {
         term.c_lflag &= ~ICANON;
+        term.c_cc[VTIME] = vtime;
+        term.c_cc[VMIN] = vmin;
     }
     else
     {
         term.c_lflag |= ICANON;
-        term.c_cc[VTIME] = vtime;
-        term.c_cc[VMIN] = vmin;
     }
 
-    if (echo == 0)
-    {
-        term.c_lflag &= ~ECHO;
-    }
-    else
-    {
-        term.c_lflag |= ECHO;
-    }
+    term.c_lflag = (echo == 0) ? term.c_lflag & ~ECHO : term.c_lflag | ECHO;
     
-    if (sigint == 0)
-    {
-        term.c_lflag &= ~ISIG;
-    }
-    else
-    {
-        term.c_lflag |= ISIG;
-    }
+    term.c_lflag = (sigint == 0) ? term.c_lflag & ~ISIG : term.c_lflag | ISIG;
     
     tcsetattr(STDIN_FILENO, TCSANOW, &term);
     return 0;

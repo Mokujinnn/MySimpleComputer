@@ -4,20 +4,20 @@
 
 int main(int argc, char const *argv[])
 {
-    // enum keys key;
+    enum keys key;
+    rk_mytermsave();
+    rk_mytermregime(0, 10, 3, 0, 0);
+    rk_readkey(&key);
+    printf("%d\n", key);
+
     // while (1)
     // {
     //     rk_readkey(&key);
-
     //     printf("%d\n", key);
     // }
 
-    // rk_mytermsave();
-    if (rk_mytermrestore() == 0)
-    {
-        printf("%d\n", 1);
-    }
-    
+    // rk_readkey(&key);
 
+    // rk_mytermrestore();
     return 0;
 }
