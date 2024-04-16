@@ -52,6 +52,9 @@ enum keys
     UP,
     DOWN,
 
+    PLUS,
+    MINUS,
+
     UNKNOWN
 };
 
@@ -59,5 +62,6 @@ int rk_readkey(enum keys *key);
 int rk_mytermsave();
 int rk_mytermrestore();
 int rk_mytermregime(int regime, int vtime, int vmin, int echo, int sigint);
+int rk_readvalue (int *value, int timeout);
 
 #endif // MY_READ_KEY_H

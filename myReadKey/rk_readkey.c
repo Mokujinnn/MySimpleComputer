@@ -30,20 +30,24 @@ int rk_readkey(enum keys *key)
         *key = P;
     else if (strncmp(buf, "q", 1) == 0)
         *key = Q;
+    else if (strncmp(buf, "-", 1) == 0)
+        *key = MINUS;
+    else if (strncmp(buf, "+", 1) == 0)
+        *key = PLUS;
     else if (strncmp(buf, "\E[15~", 5) == 0)
         *key = F5;
     else if (strncmp(buf, "\E[17~", 5) == 0)
         *key = F6;
     else if (strncmp(buf, "\E[A", 3) == 0)
-        *key = UP;    
+        *key = UP;
     else if (strncmp(buf, "\E[B", 3) == 0)
         *key = DOWN;
     else if (strncmp(buf, "\E[C", 3) == 0)
-        *key = RIGHT;    
+        *key = RIGHT;
     else if (strncmp(buf, "\E[D", 3) == 0)
         *key = LEFT;
     // else if (strncmp(buf, "^[", 1) == 0)
-    //     *key = ESC;    
+    //     *key = ESC;
     else
         *key = UNKNOWN;
 
