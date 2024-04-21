@@ -47,8 +47,6 @@ int rk_readkey(enum keys *key)
             *key = P;
         else if (strncmp(buf, "q", 1) == 0)
             *key = Q;
-        else if (strncmp(buf, "-", 1) == 0)
-            *key = MINUS;
         else if (strncmp(buf, "0", 1) == 0)
             *key = NUM0;
         else if (strncmp(buf, "1", 1) == 0)

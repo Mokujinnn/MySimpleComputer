@@ -1,16 +1,21 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#include "mySimpleComputer.h"
 #include "myBigChars.h"
 #include "myTerm.h"
 
 void
-printDecodedCommand (int value)
+printDecodedCommand (int address)
 {
   char bin[16] = { 0 };
   char str[60] = { 0 };
-  int tmp = value;
+  int tmp = 0;
+  int value = 0;
 
+  sc_memoryGet (address, &value);
+
+  tmp = value;
   for (int i = 0; i < 15; ++i)
     {
       bin[15 - i - 1] = ((tmp >> i) & 1) + '0';

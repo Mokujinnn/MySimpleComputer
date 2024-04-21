@@ -5,4 +5,4 @@
 .vscode
 **/app
 myBigChars/file.txt
-myReadKey/terminalsettings.bin
+**/terminalsettings.bin

@@ -18,7 +18,7 @@ $(TARGET): $(OBJ) $(LIBDEPENDANCE)
 	$(CC) -o $@ $(OBJ) -L$(LIBDIR) $(LIB)  
 
 
-%.o: %.c $(HEADER)
+%.o: %.c $(HEADER) main.h
 	$(CC) $(CFLAGS) $< -c -o $@ -I$(INCLUDEDIR)
 
 
