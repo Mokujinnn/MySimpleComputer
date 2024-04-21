@@ -17,6 +17,19 @@ enum keys
     F11,
     F12,
     ESC,
+    ENTER,
+
+    //Numbers
+    NUM0,
+    NUM1,
+    NUM2,
+    NUM3,
+    NUM4,
+    NUM5,
+    NUM6,
+    NUM7,
+    NUM8,
+    NUM9,
 
     //Regular Keys
     A,

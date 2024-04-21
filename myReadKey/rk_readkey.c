@@ -19,7 +19,19 @@ int rk_readkey(enum keys *key)
 
     if (len == 1)
     {
-        if (strncmp(buf, "l", 1) == 0)
+        if (strncmp(buf, "a", 1) == 0)
+            *key = A;
+        else if (strncmp(buf, "b", 1) == 0)
+            *key = B;
+        else if (strncmp(buf, "c", 1) == 0)
+            *key = C;
+        else if (strncmp(buf, "d", 1) == 0)
+            *key = D;
+        else if (strncmp(buf, "e", 1) == 0)
+            *key = E;
+        else if (strncmp(buf, "f", 1) == 0)
+            *key = F;
+        else if (strncmp(buf, "l", 1) == 0)
             *key = L;
         else if (strncmp(buf, "s", 1) == 0)
             *key = S;
@@ -37,10 +49,34 @@ int rk_readkey(enum keys *key)
             *key = Q;
         else if (strncmp(buf, "-", 1) == 0)
             *key = MINUS;
+        else if (strncmp(buf, "0", 1) == 0)
+            *key = NUM0;
+        else if (strncmp(buf, "1", 1) == 0)
+            *key = NUM1;
+        else if (strncmp(buf, "2", 1) == 0)
+            *key = NUM2;
+        else if (strncmp(buf, "3", 1) == 0)
+            *key = NUM3;
+        else if (strncmp(buf, "4", 1) == 0)
+            *key = NUM4;
+        else if (strncmp(buf, "5", 1) == 0)
+            *key = NUM5;
+        else if (strncmp(buf, "6", 1) == 0)
+            *key = NUM6;
+        else if (strncmp(buf, "7", 1) == 0)
+            *key = NUM7;
+        else if (strncmp(buf, "8", 1) == 0)
+            *key = NUM8;
+        else if (strncmp(buf, "9", 1) == 0)
+            *key = NUM9;
+        else if (strncmp(buf, "-", 1) == 0)
+            *key = MINUS;
         else if (strncmp(buf, "+", 1) == 0)
             *key = PLUS;
         else if (strncmp(buf, "\E", 1) == 0)
             *key = ESC;
+        else if (strncmp(buf, "\n", 1) == 0)
+            *key = ENTER;
         else
             *key = UNKNOWN;
     }
