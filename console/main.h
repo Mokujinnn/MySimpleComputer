@@ -7,6 +7,10 @@
 #include "mySimpleComputer.h"
 #include "myReadKey.h"
 
+#define INPUTCELL 0
+#define INPUTACCUM 1
+#define INPUTICOUNTER 2
+
 void loadFont(int *bigchar, int n)
 {
     FILE *f = fopen("font/font.bin", "rb");
@@ -133,25 +137,44 @@ int KeyToInt(enum keys key)
 {
     switch (key)
     {
-    case PLUS: return 0;
-    case MINUS: return 1;
-    case NUM0: return 0;
-    case NUM1: return 1;
-    case NUM2: return 2;
-    case NUM3: return 3;
-    case NUM4: return 4;
-    case NUM5: return 5;
-    case NUM6: return 6;
-    case NUM7: return 7;
-    case NUM8: return 8;
-    case NUM9: return 9;
-    case A: return 10;
-    case B: return 11;
-    case C: return 12;
-    case D: return 13;
-    case E: return 14;
-    case F: return 15;
-    default: return -1;
+    case PLUS:
+        return 0;
+    case MINUS:
+        return 1;
+    case NUM0:
+        return 0;
+    case NUM1:
+        return 1;
+    case NUM2:
+        return 2;
+    case NUM3:
+        return 3;
+    case NUM4:
+        return 4;
+    case NUM5:
+        return 5;
+    case NUM6:
+        return 6;
+    case NUM7:
+        return 7;
+    case NUM8:
+        return 8;
+    case NUM9:
+        return 9;
+    case A:
+        return 10;
+    case B:
+        return 11;
+    case C:
+        return 12;
+    case D:
+        return 13;
+    case E:
+        return 14;
+    case F:
+        return 15;
+    default:
+        return -1;
     }
 }
 
@@ -181,20 +204,18 @@ int IsCorrectInPlaceInput(enum keys key, int n)
     return 0;
 }
 
-void InPlaceInput(int *currentCell)
+void InPlaceInput(int line, int colmn, int type)
 {
     int buf[5] = {0};
-    int line = *currentCell / 10;
-    int colmn = (*currentCell % 10) * 6;
     int i = 0;
     int flag = 1;
     enum keys key;
 
     mt_setcursorvisible(1);
 
-    mt_gotoXY(colmn + 2, line + 2);
+    mt_gotoXY(colmn, line);
     write(STDOUT_FILENO, "     ", 5);
-    mt_gotoXY(colmn + 2, line + 2);
+    mt_gotoXY(colmn, line);
 
     rk_mytermsave();
 
@@ -220,55 +241,76 @@ void InPlaceInput(int *currentCell)
         return;
     }
 
-    sc_commandEncode(buf[0], buf[1] * 16 + buf[2], buf[3] * 16 + buf[4], &i); 
-    sc_memorySet(*currentCell, i);
+    sc_commandEncode(buf[0], buf[1] * 16 + buf[2], buf[3] * 16 + buf[4], &i);
+
+    if (type == INPUTCELL)
+    {
+        sc_memorySet(((line - 2) * 10 + (colmn - 2) / 6), i);
+    }
+    else if (type == INPUTACCUM)
+    {
+        sc_accumulatorSet(i);
+    }
+    else if (type == INPUTICOUNTER)
+    {
+        sc_icounterSet(i);
+    }
 
     rk_mytermrestore();
     mt_setcursorvisible(0);
 }
 
-void InPlaceAccumulator()
+void MemorySave()
 {
-    int buf[5] = {0};
-    int flag = 1;
-    enum keys key;
-    int i = 0;
+    char buf[128] = {0};
+
+    mt_gotoXY(1, 26);
+    write(STDOUT_FILENO, "Введите имя файла для сохранения: ", 63);
 
     mt_setcursorvisible(1);
-
-    mt_gotoXY (69, 2);
-    write(STDOUT_FILENO, "     ", 6);
-    mt_gotoXY (69, 2);
-
     rk_mytermsave();
 
-    rk_mytermregime(0, 1, 1, 1, 0);
+    rk_mytermregime(1, 1, 1, 1, 0);
 
-    for (i = 0; i < 5; i++)
-    {
-        rk_readkey(&key);
-        if (!IsCorrectInPlaceInput(key, i))
-        {
-            flag = 0;
-            break;
-        }
-        buf[i] = KeyToInt(key);
-    }
+    read(STDIN_FILENO, buf, 127);
+    buf[bc_strlen(buf)-1] = '\0';
 
-    if (!flag)
-    {
-        mt_gotoXY(74, 2);
-        write(STDOUT_FILENO, " ", 1);
-        rk_mytermrestore();
-        mt_setcursorvisible(0);
-        return;
-    }
-
-    sc_commandEncode(buf[0], buf[1] * 16 + buf[2], buf[3] * 16 + buf[4], &i); 
-    sc_accumulatorSet(i);
+    sc_memorySave(buf);
 
     rk_mytermrestore();
     mt_setcursorvisible(0);
+
+    mt_gotoXY(1, 26);
+    mt_delline();
+}
+
+void MemoryLoad()
+{
+    char buf[128] = {0};
+
+    mt_gotoXY(1, 26);
+    write(STDOUT_FILENO, "Введите имя файла для загрузки: ", 59);
+
+    mt_setcursorvisible(1);
+    rk_mytermsave();
+
+    rk_mytermregime(1, 1, 1, 1, 0);
+
+    read(STDIN_FILENO, buf, 127);
+    buf[bc_strlen(buf)-1] = '\0';
+
+    sc_memoryLoad(buf);
+
+    rk_mytermrestore();
+    mt_setcursorvisible(0);
+
+    mt_gotoXY(1, 26);
+    mt_delline();
+}
+
+void MemoryReset()
+{
+    sc_memoryInit();
 }
 
 void Control(enum keys key, int *currentCell, int *escIsNotPressed)
@@ -319,12 +361,28 @@ void Control(enum keys key, int *currentCell, int *escIsNotPressed)
             *currentCell += 10;
         break;
     case ENTER:
-        InPlaceInput(currentCell);
+        InPlaceInput(*currentCell / 10 + 2, (*currentCell % 10) * 6 + 2, INPUTCELL);
         break;
     case F5:
-        InPlaceAccumulator();
+        InPlaceInput(2, 69, INPUTACCUM);
+        break;
+    case F6:
+        InPlaceInput(5, 69, INPUTICOUNTER);
+        break;
+    case L:
+        MemoryLoad();
+        break;
+    case S:
+        MemorySave();
+        break;
+    case I:
+        MemoryReset();
         break;
     default:
         break;
     }
 }
+
+#undef INPUTCELL
+#undef INPUTACCUM
+#undef INPUTICOUNTER

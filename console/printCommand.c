@@ -16,6 +16,9 @@ printCommand ()
   sc_icounterGet (&value);
   sc_commandDecode (value, &sign, &command, &operand);
 
+  sc_memoryGet(operand, &value);
+  sc_commandDecode (value, &sign, &command, &operand);
+
   if (command < 0 && command > 76)
     tmp[0] = '!';
 
