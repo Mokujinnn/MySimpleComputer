@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "mySimpleComputer.h"
 #include "myBigChars.h"
+#include "mySimpleComputer.h"
 #include "myTerm.h"
 
 void
