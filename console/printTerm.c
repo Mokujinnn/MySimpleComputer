@@ -14,9 +14,6 @@ printTerm (int address, int input)
   int command = 0;
   int operand = 0;
 
-  bc_box (63, 19, 72, 25, ForegroundDefault, BackgroundDefault, "IN---OUT",
-          ForegroundDarkRed, BackgroundLightGray);
-
   for (int i = 3; i >= 0; i--)
     {
       strcpy (slider[i + 1], slider[i]);
@@ -30,7 +27,8 @@ printTerm (int address, int input)
     {
       sc_memoryGet (address, &value);
       sc_commandDecode (value, &sign, &command, &operand);
-      snprintf (slider[0], 10, "%.2x< %.2x%.2x", address, command, operand);
+      snprintf (slider[0], 10, "%.2x<  %.2x%.2x", address, command, operand);
+      slider[0][4] = sign == 1 ? '-' : '+';
     }
 
   for (int i = 0; i < 5; i++)

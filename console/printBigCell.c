@@ -9,10 +9,6 @@ printBigCell (int address, int bigchars[18][ARR_SIZE])
   int command = 0;
   int operand = 0;
 
-  bc_box (62, 7, 111, 18, ForegroundDefault, BackgroundDefault,
-          "Редактируемая ечейка (увеличено)", ForegroundDarkRed,
-          ForegroundDefault);
-
   sc_memoryGet (address, &value);
   sc_commandDecode (value, &sign, &command, &operand);
 
