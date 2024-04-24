@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -g -O0
 INCLUDEDIR = ../include/
 
-LIB = -lmySimpleComputer-d -lmyTerm-d -lmyBigChars-d -lmyReadKey-d
+LIB = -lmyReadKey-d -lmySimpleComputer-d -lmyTerm-d -lmyBigChars-d
 LIBDIR = ../libs/
 
 SRC = $(wildcard *.c)

@@ -32,6 +32,7 @@ main ()
       UpdateAll (bigchars, currentCell);
     }
 
+  rk_mytermregime (1, 1, 1, 1, 0);
   mt_setcursorvisible (1);
   mt_clrscr ();
   mt_gotoXY (1, 1);

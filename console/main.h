@@ -141,86 +141,10 @@ UpdateAll (int bigchars[][ARR_SIZE], int addresOfCurrentCell)
   printTerm (0, 0);
 }
 
-int
-KeyToInt (enum keys key)
-{
-  switch (key)
-    {
-    case PLUS:
-      return 0;
-    case MINUS:
-      return 1;
-    case NUM0:
-      return 0;
-    case NUM1:
-      return 1;
-    case NUM2:
-      return 2;
-    case NUM3:
-      return 3;
-    case NUM4:
-      return 4;
-    case NUM5:
-      return 5;
-    case NUM6:
-      return 6;
-    case NUM7:
-      return 7;
-    case NUM8:
-      return 8;
-    case NUM9:
-      return 9;
-    case A:
-      return 10;
-    case B:
-      return 11;
-    case C:
-      return 12;
-    case D:
-      return 13;
-    case E:
-      return 14;
-    case F:
-      return 15;
-    default:
-      return -1;
-    }
-}
-
-int
-IsCorrectInPlaceInput (enum keys key, int n)
-{
-  if (n == 0)
-    {
-      return key == PLUS || key == MINUS;
-    }
-  else if (n == 1)
-    {
-      return key >= NUM0 && key <= NUM5;
-    }
-  else if (n == 2)
-    {
-      return (key >= NUM0 && key <= NUM9) || (key >= A && key <= F);
-    }
-  else if (n == 3)
-    {
-      return (key >= NUM0 && key <= NUM7);
-    }
-  else if (n == 4)
-    {
-      return (key >= NUM0 && key <= NUM9) || (key >= A && key <= F);
-    }
-
-  return 0;
-}
-
 void
 InPlaceInput (int line, int colmn, int type)
 {
-  int buf[5] = { 0 };
-  int i = 0;
-  int flag = 1;
-  enum keys key;
+  int value = -1;
 
   mt_setcursorvisible (1);
 
@@ -228,43 +152,24 @@ InPlaceInput (int line, int colmn, int type)
   write (STDOUT_FILENO, "     ", 5);
   mt_gotoXY (colmn, line);
 
-  rk_mytermsave ();
+  rk_readvalue (&value, 10);
 
-  rk_mytermregime (0, 1, 1, 1, 0);
-
-  for (i = 0; i < 5; i++)
+  if (value == -1)
     {
-      rk_readkey (&key);
-      if (!IsCorrectInPlaceInput (key, i))
-        {
-          flag = 0;
-          break;
-        }
-      buf[i] = KeyToInt (key);
-    }
-
-  if (!flag)
-    {
-      mt_gotoXY (colmn + 5, line + 5);
-      write (STDOUT_FILENO, " ", 1);
-      rk_mytermrestore ();
-      mt_setcursorvisible (0);
       return;
     }
 
-  sc_commandEncode (buf[0], buf[1] * 16 + buf[2], buf[3] * 16 + buf[4], &i);
-
   if (type == INPUTCELL)
     {
-      sc_memorySet (((line - 2) * 10 + (colmn - 2) / 6), i);
+      sc_memorySet (((line - 2) * 10 + (colmn - 2) / 6), value);
     }
   else if (type == INPUTACCUM)
     {
-      sc_accumulatorSet (i);
+      sc_accumulatorSet (value);
     }
   else if (type == INPUTICOUNTER)
     {
-      sc_icounterSet (i);
+      sc_icounterSet (value);
     }
 
   rk_mytermrestore ();
