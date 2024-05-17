@@ -156,6 +156,7 @@ InPlaceInput (int line, int colmn, int type)
 
   if (value == -1)
     {
+      mt_setcursorvisible (0);
       return;
     }
 
@@ -172,7 +173,6 @@ InPlaceInput (int line, int colmn, int type)
       sc_icounterSet (value);
     }
 
-  rk_mytermrestore ();
   mt_setcursorvisible (0);
 }
 
