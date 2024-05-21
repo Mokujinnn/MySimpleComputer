@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <signal.h>
+#include <sys/time.h>
 
 #include "console.h"
 #include "main.h"
@@ -14,22 +16,42 @@ main ()
   int bigchars[18][2];
   int currentCell = 0;
   int escIsNotPresed = 1;
+  enum keys key = -1;
+  int interrupt = 0;
   Init (*bigchars);
 
   mt_setcursorvisible (0);
 
   printAllBoxes ();
   printKeybord ();
+  UpdateAndDraw (bigchars, currentCell);
+
+  signal(SIGALRM, IRC);
+  signal(SIGUSR1, IRC);
+
+  struct itimerval nval, oval;
+
+  nval.it_interval.tv_sec = 0;
+  nval.it_interval.tv_usec = 500000;
+  nval.it_value.tv_sec = 1;
+  nval.it_value.tv_usec = 0;
+
+  setitimer (ITIMER_REAL, &nval, &oval);
 
   rk_mytermregime (0, 1, 1, 0, 0);
-  UpdateAll (bigchars, currentCell);
-
   while (escIsNotPresed)
     {
-      enum keys key = -1;
-      rk_readkey (&key);
+      key = -1;
+      interrupt = 0;
+      UpdateAndDraw (bigchars, currentCell);
+
+      sc_regGet(IGNORE_INTERRUPT, &interrupt);
+
+      if (interrupt == 1)
+      {
+        rk_readkey (&key);
+      }
       Control (key, &currentCell, &escIsNotPresed);
-      UpdateAll (bigchars, currentCell);
     }
 
   rk_mytermregime (1, 1, 1, 1, 0);

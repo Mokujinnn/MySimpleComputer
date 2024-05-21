@@ -39,6 +39,7 @@ rk_readvalue (int *value, int timeout)
 
       if (!flag)
         {
+          rk_mytermrestore ();
           return -1;
         }
 
