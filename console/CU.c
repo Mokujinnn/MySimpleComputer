@@ -86,12 +86,18 @@ void CU()
 
     sc_icounterGet(&icounter);
 
-    if (sc_memoryGet(icounter, &value) == -1)
+    int code = sc_memoryGet(icounter, &value);
+    if (code == -1)
     {
         sc_regSet(OUTMEM, 1);
         sc_regSet(IGNORE_INTERRUPT, 1);
         return;
     }
+    if (code == -2)
+    {
+        return;
+    }
+    
     if (sc_commandDecode(value, &sign, &command, &operand) == -1)
     {
         sc_regSet(WRONG_COMMAND, 1);

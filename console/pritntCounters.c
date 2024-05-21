@@ -24,7 +24,7 @@ printCounters ()
   sc_tcounterGet (&value);
   sc_commandDecode (value, &sign, &command, &operand);
 
-  snprintf (&str2[4], 3, "%.2x", operand);
+  snprintf (&str2[4], 3, "%.2d", operand);
 
   mt_gotoXY (65, 5);
   write (STDOUT_FILENO, str1, 10);

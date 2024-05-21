@@ -28,15 +28,14 @@ void loadFont(int *bigchar, int n)
 
 void InitMem()
 {
+  sc_setIgnoreCache(1);
   sc_memoryInit();
-  for (int i = 0; i < rand() % SIZEMEM; ++i)
-  {
-    sc_memorySet(i, 0);
-  }
-
   sc_regInit();
   sc_accumulatorInit();
   sc_icounterInit();
+  sc_tcounterInit();
+  sc_cacheInit();
+  sc_setIgnoreCache(0);
 }
 
 int CheckOutputStream()
@@ -114,16 +113,17 @@ void printAllBoxes()
   bc_box(62, 7, 111, 18, ForegroundDefault, BackgroundDefault,
          " Редактируемая ечейка (увеличено) ", ForegroundDarkRed,
          ForegroundDefault);
-  bc_box(63, 19, 73, 25, ForegroundDefault, BackgroundDefault, " IN--OUT ",
+  bc_box(67, 19, 77, 25, ForegroundDefault, BackgroundDefault, " IN--OUT ",
          ForegroundDarkRed, BackgroundLightGray);
-  bc_box(1, 19, 62, 25, ForegroundDefault, BackgroundDefault, " Кеш Память ",
+  bc_box(1, 19, 66, 25, ForegroundDefault, BackgroundDefault, " Кеш Память ",
          ForegroundDarkRed, BackgroundDefault);
-  bc_box(74, 19, 111, 25, ForegroundDefault, BackgroundDefault,
+  bc_box(78, 19, 111, 25, ForegroundDefault, BackgroundDefault,
          " Клавиатура ", ForegroundDarkRed, BackgroundDefault);
 }
 
 void UpdateAndDraw(int bigchars[][ARR_SIZE], int addresOfCurrentCell)
 {
+  sc_setIgnoreCache(1);
   printMem(addresOfCurrentCell);
   printFlags();
   printDecodedCommand(addresOfCurrentCell);
@@ -131,7 +131,8 @@ void UpdateAndDraw(int bigchars[][ARR_SIZE], int addresOfCurrentCell)
   printCounters();
   printCommand();
   printBigCell(addresOfCurrentCell, bigchars);
-  //   printTerm (0, 0);
+  printCache();
+  sc_setIgnoreCache(0);
 }
 
 void InPlaceInput(int line, int colmn, int type)
@@ -292,7 +293,6 @@ void Control(enum keys key, int *currentCell, int *escIsNotPressed)
     break;
   case R:
     sc_regSet(IGNORE_INTERRUPT, 0);
-    raise (SIGALRM);
     break;
   case T:
     CU();
