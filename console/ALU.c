@@ -35,7 +35,6 @@ void ALU_DIVIDE(int cell)
     {
         sc_regSet(DIVISION_BY_ZERO, 1);
         sc_regSet(IGNORE_INTERRUPT, 1);
-        return accumulator;
     }
 
     int accumulator_sign = accumulator >> 14;
@@ -60,14 +59,14 @@ void ALU_MUL(int cell)
     int accumulator_sign = accumulator >> 14;
     int memory_sign = memory >> 14;
 
-    if (accumulator_sign)
-    {
-        accumulator = ~accumulator + 1;
-    }
-    if (memory_sign)
-    {
-        memory = ~memory + 1;
-    }
+    // if (accumulator_sign)
+    // {
+    //     accumulator = ~accumulator + 1;
+    // }
+    // if (memory_sign)
+    // {
+    //     memory = ~memory + 1;
+    // }
 
     int value = (memory * accumulator) & 0x3fff;
 
@@ -83,7 +82,7 @@ void ALU_NOT(int cell)
 {
     int value = 0;
     sc_accumulatorGet(&value);
-    sc_memorySet(cell, ~value);
+    sc_memorySet(cell, (~value & 0x7fff));
 }
 
 void ALU_AND(int cell)

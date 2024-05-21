@@ -7,7 +7,7 @@ LIBDIR = ../libs/
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
-HEADER = $(wildcard ../include/*.h)
+HEADER = $(wildcard ../include/*.h) main.h
 LIBDEPENDANCE = $(wildcard ../libs/*.a)
 
 TARGET = pr05
@@ -18,7 +18,7 @@ $(TARGET): $(OBJ) $(LIBDEPENDANCE)
 	$(CC) -o $@ $(OBJ) -L$(LIBDIR) $(LIB)  
 
 
-%.o: %.c $(HEADER) main.h
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) $< -c -o $@ -I$(INCLUDEDIR)
 
 

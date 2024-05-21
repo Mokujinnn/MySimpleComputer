@@ -18,6 +18,11 @@ rk_readkey (enum keys *key)
 
   len = strlen (buf);
 
+  if (len > 1 && buf[len-1] == '\n')
+  {
+    buf[len--] = '\0';
+  }
+
   if (len == 1)
     {
       if (strncmp (buf, "a", 1) == 0)

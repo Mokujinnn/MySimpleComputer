@@ -12,6 +12,7 @@ enum SIZE
 
 extern int MEM[SIZEMEM];
 extern int ACC;
+extern int TCOUNTER;
 extern int INST_COUNTER;
 extern int REG_FLAG;
 
