@@ -221,9 +221,9 @@ void MemoryReset()
   sc_memoryInit();
 }
 
-void Control(enum keys key, int *currentCell, int *escIsNotPressed)
+void Control(enum keys *key, int *currentCell, int *escIsNotPressed)
 {
-  switch (key)
+  switch (*key)
   {
   case ESC:
     *escIsNotPressed = 0;
@@ -292,7 +292,7 @@ void Control(enum keys key, int *currentCell, int *escIsNotPressed)
     break;
   case R:
     sc_regSet(IGNORE_INTERRUPT, 0);
-    raise (SIGALRM);
+    *key = -1;
     break;
   case T:
     CU();

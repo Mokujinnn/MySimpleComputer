@@ -51,7 +51,7 @@ main ()
       {
         rk_readkey (&key);
       }
-      Control (key, &currentCell, &escIsNotPresed);
+      Control (&key, &currentCell, &escIsNotPresed);
     }
 
   rk_mytermregime (1, 1, 1, 1, 0);

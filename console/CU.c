@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include "mySimpleComputer.h"
 #include "console.h"
+#include "myReadKey.h"
 
 void printKeybord();
 
@@ -22,9 +23,10 @@ void CU_CPUINFO()
 void CU_READ(int cell)
 {
     sc_regSet(IGNORE_INTERRUPT, 1);
+    rk_mytermregime(0, 1, 1, 1, 1);
     printTerm(cell, 1);
-    // rk_mytermregime(0, 1, 0, 0, 0);
-    sc_regSet(IGNORE_INTERRUPT, 0);
+    rk_mytermregime(0, 1, 1, 0, 0);
+    // sc_regSet(IGNORE_INTERRUPT, 0);
 }
 
 void CU_WRITE(int cell)

@@ -48,4 +48,4 @@ void
 MemoryReset ();
 
 void
-Control (enum keys key, int *currentCell, int *escIsNotPressed);
+Control (enum keys *key, int *currentCell, int *escIsNotPressed);
