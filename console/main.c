@@ -1,8 +1,8 @@
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <signal.h>
 #include <sys/time.h>
+#include <unistd.h>
 
 #include "console.h"
 #include "main.h"
@@ -26,8 +26,8 @@ main ()
   printKeybord ();
   UpdateAndDraw (bigchars, currentCell);
 
-  signal(SIGALRM, IRC);
-  signal(SIGUSR1, IRC);
+  signal (SIGALRM, IRC);
+  signal (SIGUSR1, IRC);
 
   struct itimerval nval, oval;
 
@@ -45,12 +45,12 @@ main ()
       interrupt = 0;
       UpdateAndDraw (bigchars, currentCell);
 
-      sc_regGet(IGNORE_INTERRUPT, &interrupt);
+      sc_regGet (IGNORE_INTERRUPT, &interrupt);
 
       if (interrupt == 1)
-      {
-        rk_readkey (&key);
-      }
+        {
+          rk_readkey (&key);
+        }
       Control (&key, &currentCell, &escIsNotPresed);
     }
 

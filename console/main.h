@@ -11,41 +11,28 @@
 #define INPUTACCUM 1
 #define INPUTICOUNTER 2
 
-void
-loadFont (int *bigchar, int n);
+void loadFont (int *bigchar, int n);
 
-void
-InitMem ();
+void InitMem ();
 
-int
-CheckOutputStream ();
+int CheckOutputStream ();
 
-void
-Init (int *bigchar);
+void Init (int *bigchar);
 
-void
-printMem (int addresOfCurrentCell);
+void printMem (int addresOfCurrentCell);
 
-void
-printKeybord ();
+void printKeybord ();
 
-void
-printAllBoxes ();
+void printAllBoxes ();
 
-void
-UpdateAndDraw (int bigchars[][ARR_SIZE], int addresOfCurrentCell);
+void UpdateAndDraw (int bigchars[][ARR_SIZE], int addresOfCurrentCell);
 
-void
-InPlaceInput (int line, int colmn, int type);
+void InPlaceInput (int line, int colmn, int type);
 
-void
-MemorySave ();
+void MemorySave ();
 
-void
-MemoryLoad ();
+void MemoryLoad ();
 
-void
-MemoryReset ();
+void MemoryReset ();
 
-void
-Control (enum keys *key, int *currentCell, int *escIsNotPressed);
+void Control (enum keys *key, int *currentCell, int *escIsNotPressed);

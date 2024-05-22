@@ -21,8 +21,8 @@ int sc_icounterGet (int *value);
 int sc_commandEncode (int sign, int command, int operand, int *value);
 int sc_commandDecode (int value, int *sign, int *command, int *operand);
 int sc_commandValidate (int command);
-void sc_tcounterInit();
-void sc_tcounterSet(int value);
-int sc_tcounterGet(int *value);
+void sc_tcounterInit ();
+void sc_tcounterSet (int value);
+int sc_tcounterGet (int *value);
 
 #endif // MY_SIMPLE_COMPUTER_H

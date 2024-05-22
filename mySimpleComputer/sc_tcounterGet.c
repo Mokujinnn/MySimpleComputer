@@ -1,12 +1,13 @@
 #include "sc_variables.h"
 
-int sc_tcounterGet(int *value)
+int
+sc_tcounterGet (int *value)
 {
-    if (value == NULL)
+  if (value == NULL)
     {
-        return -1;
+      return -1;
     }
-    
-    *value = TCOUNTER;
-    return 0;
+
+  *value = TCOUNTER;
+  return 0;
 }
