@@ -14,7 +14,6 @@ int sc_getCacheLine(int linenum, int *mas)
         {
             mas[i] = CACHE[linenum].line[i];
         }
-            
     }
 
     return CACHE[linenum].address;

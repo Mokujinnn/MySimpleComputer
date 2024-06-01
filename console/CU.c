@@ -22,7 +22,9 @@ void CU_CPUINFO()
 void CU_READ(int cell)
 {
     sc_regSet(IGNORE_INTERRUPT, 1);
+    sc_setIgnoreCache(1);
     printTerm(cell, 1);
+    sc_setIgnoreCache(0);
     // rk_mytermregime(0, 1, 0, 0, 0);
     sc_regSet(IGNORE_INTERRUPT, 0);
 }
@@ -85,6 +87,7 @@ void CU()
     int value = 0;
 
     sc_icounterGet(&icounter);
+    sc_setIgnoreCache(0);
 
     int code = sc_memoryGet(icounter, &value);
     if (code == -1)

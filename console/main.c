@@ -10,10 +10,11 @@
 #include "myReadKey.h"
 #include "mySimpleComputer.h"
 
+int bigchars[18][2];
+
 int
 main ()
 {
-  int bigchars[18][2];
   int currentCell = 0;
   int escIsNotPresed = 1;
   enum keys key = -1;
@@ -45,12 +46,11 @@ main ()
     {
       key = -1;
       interrupt = 0;
-      UpdateAndDraw (bigchars, currentCell);
 
       sc_regGet(IGNORE_INTERRUPT, &interrupt);
       sc_tcounterGet(&tc);
 
-      if (interrupt == 1 && tc == 0)
+      if (interrupt && tc == 0)
       {
         rk_readkey (&key);
       }

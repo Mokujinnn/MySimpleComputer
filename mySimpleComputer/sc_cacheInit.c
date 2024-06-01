@@ -5,7 +5,6 @@ void sc_cacheInit()
     for (int i = 0; i < CACHESIZE; i++)
     {
         CACHE[i].address = -1;
-        CACHE[i].size = 0;
         CACHE[i].downtime = 0;
         for (int j = 0; j < 10; j++)
         {

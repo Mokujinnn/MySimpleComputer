@@ -12,6 +12,8 @@
 #define INPUTACCUM 1
 #define INPUTICOUNTER 2
 
+extern int bigchars[18][2];
+
 void loadFont(int *bigchar, int n)
 {
   FILE *f = fopen("font/font.bin", "rb");
@@ -131,7 +133,7 @@ void UpdateAndDraw(int bigchars[][ARR_SIZE], int addresOfCurrentCell)
   printCounters();
   printCommand();
   printBigCell(addresOfCurrentCell, bigchars);
-  printCache();
+  // printCache();
   sc_setIgnoreCache(0);
 }
 
@@ -238,6 +240,10 @@ void Control(enum keys key, int *currentCell, int *escIsNotPressed)
       *currentCell -= 9;
     else
       *currentCell += 1;
+
+    sc_setIgnoreCache(1);
+    printMem(*currentCell);
+    sc_setIgnoreCache(0);
     break;
   case LEFT:
     if (*currentCell == 120)
@@ -248,6 +254,10 @@ void Control(enum keys key, int *currentCell, int *escIsNotPressed)
       *currentCell += 9;
     else
       *currentCell -= 1;
+
+    sc_setIgnoreCache(1);
+    printMem(*currentCell);
+    sc_setIgnoreCache(0);
     break;
   case UP:
     if (*currentCell == 8 || *currentCell == 9)
@@ -258,6 +268,10 @@ void Control(enum keys key, int *currentCell, int *escIsNotPressed)
       *currentCell += 120;
     else
       *currentCell -= 10;
+
+    sc_setIgnoreCache(1);
+    printMem(*currentCell);
+    sc_setIgnoreCache(0);
     break;
   case DOWN:
     if (*currentCell == 118 || *currentCell == 119)
@@ -268,28 +282,48 @@ void Control(enum keys key, int *currentCell, int *escIsNotPressed)
       *currentCell -= 120;
     else
       *currentCell += 10;
+
+    sc_setIgnoreCache(1);
+    printMem(*currentCell);
+    sc_setIgnoreCache(0);
     break;
   case ENTER:
+    sc_setIgnoreCache(1);
     InPlaceInput(*currentCell / 10 + 2, (*currentCell % 10) * 6 + 2,
                  INPUTCELL);
+    printMem(*currentCell);
+    sc_setIgnoreCache(0);
     break;
   case F5:
+    sc_setIgnoreCache(1);
     InPlaceInput(2, 69, INPUTACCUM);
+    sc_setIgnoreCache(0);
     break;
   case F6:
+    sc_setIgnoreCache(1);
     InPlaceInput(5, 69, INPUTICOUNTER);
+    sc_setIgnoreCache(0);
     break;
   case L:
+    sc_setIgnoreCache(1);
     MemoryLoad();
+    printMem(*currentCell);
+    sc_setIgnoreCache(0);
     break;
   case S:
+    sc_setIgnoreCache(1);
     MemorySave();
+    printMem(*currentCell);
+    sc_setIgnoreCache(0);
     break;
   case I:
+    sc_setIgnoreCache(1);
     MemoryReset();
     sc_accumulatorInit();
     sc_icounterInit();
     sc_regInit();
+    printMem(*currentCell);
+    sc_setIgnoreCache(0);
     break;
   case R:
     sc_regSet(IGNORE_INTERRUPT, 0);

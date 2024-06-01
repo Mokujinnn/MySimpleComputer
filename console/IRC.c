@@ -21,13 +21,15 @@ void IRC(int signum)
     if (tcounter)
     {
       sc_tcounterSet(--tcounter);
+
       sc_setIgnoreCache(1);
       printFlags();
       printAccumulator();
       printCounters();
       printCommand();
-      printCache();
+      // printCache();
       sc_setIgnoreCache(0);
+
       if (!tcounter)
       {
         sc_regSet(IGNORE_INTERRUPT, 0);

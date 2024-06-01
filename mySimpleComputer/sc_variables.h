@@ -22,7 +22,6 @@ typedef struct
   int downtime;
   int address;
   int line[10];
-  int size;
 } Cacheline;
 
 extern Cacheline CACHE[CACHESIZE];

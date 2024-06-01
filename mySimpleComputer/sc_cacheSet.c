@@ -3,8 +3,10 @@
 
 int sc_cacheSet(int address, int value)
 {
-    if (address < 0 || address >= SIZEMEM)
+  if (address < 0 || address >= SIZEMEM)
+  {
     return -1;
+  }
 
   int i;
   int max_downtime = 0;
@@ -42,12 +44,14 @@ int sc_cacheSet(int address, int value)
         if (CACHE[i].downtime == max_downtime)
           break;
     }
+
   line_size = CACHE[i].address == 120 ? 8 : 10;
   if (displacement)
     for (int j = 0; j < line_size; j++)
       {
         MEM[CACHE[i].address + j] = CACHE[i].line[j];
       }
+      
   CACHE[i].address = address - (address % 10);
   line_size = CACHE[i].address == 120 ? 8 : 10;
   for (int j = 0; j < line_size; j++)

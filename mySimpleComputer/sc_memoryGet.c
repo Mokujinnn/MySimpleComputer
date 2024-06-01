@@ -23,6 +23,5 @@ sc_memoryGet (int address, int *value)
     return -2;
   }
 
-  *value = MEM[address];
   return 0;
 }
