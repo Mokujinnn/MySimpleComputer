@@ -57,8 +57,9 @@ void printCounters ();
 void printTerm (int address, int input);
 void printCommand ();
 void printBigCell (int address, int bigchars[][ARR_SIZE]);
-void ALU (int command, int operand);
-void CU ();
-void IRC (int signum);
+void printCache();
+void ALU(int command, int operand);
+void CU();
+void IRC(int signum);
 
 #endif // CONSOLE_H

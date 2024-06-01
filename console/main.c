@@ -10,14 +10,16 @@
 #include "myReadKey.h"
 #include "mySimpleComputer.h"
 
+int bigchars[18][2];
+
 int
 main ()
 {
-  int bigchars[18][2];
   int currentCell = 0;
   int escIsNotPresed = 1;
   enum keys key = -1;
   int interrupt = 0;
+  int tc = 0;
   Init (*bigchars);
 
   mt_setcursorvisible (0);
@@ -36,22 +38,23 @@ main ()
   nval.it_value.tv_sec = 1;
   nval.it_value.tv_usec = 0;
 
+  rk_mytermregime (0, 1, 1, 0, 0);
+
   setitimer (ITIMER_REAL, &nval, &oval);
 
-  rk_mytermregime (0, 1, 1, 0, 0);
   while (escIsNotPresed)
     {
       key = -1;
       interrupt = 0;
-      UpdateAndDraw (bigchars, currentCell);
 
-      sc_regGet (IGNORE_INTERRUPT, &interrupt);
+      sc_regGet(IGNORE_INTERRUPT, &interrupt);
+      sc_tcounterGet(&tc);
 
-      if (interrupt == 1)
-        {
-          rk_readkey (&key);
-        }
-      Control (&key, &currentCell, &escIsNotPresed);
+      if (interrupt && tc == 0)
+      {
+        rk_readkey (&key);
+      }
+      Control (key, &currentCell, &escIsNotPresed);
     }
 
   rk_mytermregime (1, 1, 1, 1, 0);

@@ -5,7 +5,8 @@
 
 enum SIZE
 {
-  SIZEMEM = 128
+  SIZEMEM = 128,
+  CACHESIZE = 5
 };
 
 #ifndef SC_PUBLIC_INTERFACE
@@ -15,6 +16,16 @@ extern int ACC;
 extern int TCOUNTER;
 extern int INST_COUNTER;
 extern int REG_FLAG;
+
+typedef struct 
+{
+  int downtime;
+  int address;
+  int line[10];
+} Cacheline;
+
+extern Cacheline CACHE[CACHESIZE];
+extern int IGNORE_CACHE;
 
 #endif // SC_PUBLIC_INTERFACE
 

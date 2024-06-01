@@ -23,19 +23,34 @@ IRC (int signum)
         {
           sc_tcounterSet (--tcounter);
 
-          if (!tcounter)
-            {
-              sc_regSet (IGNORE_INTERRUPT, 0);
-              flag = 0;
-            }
-          else
-            {
-              sc_regSet (IGNORE_INTERRUPT, 1);
-              return;
-            }
-        }
-      if (flag)
+      sc_setIgnoreCache(1);
+      printFlags();
+      printAccumulator();
+      printCounters();
+      printCommand();
+      // printCache();
+      sc_setIgnoreCache(0);
+
+      if (!tcounter)
+      {
+        sc_regSet(IGNORE_INTERRUPT, 0);
+        flag = 0;
+      }
+      else
+      {
+        sc_regSet(IGNORE_INTERRUPT, 1);
         return;
       CU ();
     }
+    if (flag)
+      return;
+    CU();
+    sc_setIgnoreCache(1);
+    printFlags();
+    printAccumulator();
+    printCounters();
+    printCommand();
+    printCache();
+    sc_setIgnoreCache(0);
+  }
 }

@@ -7,3 +7,6 @@ int ACC;
 int INST_COUNTER;
 int TCOUNTER;
 int REG_FLAG;
+
+Cacheline CACHE[CACHESIZE];
+int IGNORE_CACHE;

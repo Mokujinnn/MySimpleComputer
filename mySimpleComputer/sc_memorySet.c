@@ -1,5 +1,7 @@
 #include "sc_variables.h"
 
+int sc_cacheSet(int, int);
+
 int
 sc_memorySet (int address, int value)
 {
@@ -9,6 +11,16 @@ sc_memorySet (int address, int value)
       return -1;
     }
 
-  MEM[address] = value;
+  if (IGNORE_CACHE)
+  {
+    MEM[address] = value;
+    return 0;
+  }
+  
+  if (sc_cacheSet (address, value))
+  {
+    return -2;
+  }
+  
   return 0;
 }

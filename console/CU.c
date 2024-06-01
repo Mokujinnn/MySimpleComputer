@@ -27,11 +27,12 @@ CU_CPUINFO ()
 void
 CU_READ (int cell)
 {
-  sc_regSet (IGNORE_INTERRUPT, 1);
-  rk_mytermregime (0, 1, 1, 1, 1);
-  printTerm (cell, 1);
-  rk_mytermregime (0, 1, 1, 0, 0);
-  // sc_regSet(IGNORE_INTERRUPT, 0);
+    sc_regSet(IGNORE_INTERRUPT, 1);
+    sc_setIgnoreCache(1);
+    printTerm(cell, 1);
+    sc_setIgnoreCache(0);
+    // rk_mytermregime(0, 1, 0, 0, 0);
+    sc_regSet(IGNORE_INTERRUPT, 0);
 }
 
 void
@@ -99,15 +100,22 @@ CU ()
   int icounter = 0;
   int value = 0;
 
-  sc_icounterGet (&icounter);
+    sc_icounterGet(&icounter);
+    sc_setIgnoreCache(0);
 
-  if (sc_memoryGet (icounter, &value) == -1)
+    int code = sc_memoryGet(icounter, &value);
+    if (code == -1)
     {
       sc_regSet (OUTMEM, 1);
       sc_regSet (IGNORE_INTERRUPT, 1);
       return;
     }
-  if (sc_commandDecode (value, &sign, &command, &operand) == -1)
+    if (code == -2)
+    {
+        return;
+    }
+    
+    if (sc_commandDecode(value, &sign, &command, &operand) == -1)
     {
       sc_regSet (WRONG_COMMAND, 1);
       sc_regSet (IGNORE_INTERRUPT, 1);
