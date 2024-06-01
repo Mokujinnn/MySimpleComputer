@@ -17,7 +17,7 @@ extern int TCOUNTER;
 extern int INST_COUNTER;
 extern int REG_FLAG;
 
-typedef struct 
+typedef struct
 {
   int downtime;
   int address;

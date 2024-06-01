@@ -47,14 +47,14 @@ main ()
       key = -1;
       interrupt = 0;
 
-      sc_regGet(IGNORE_INTERRUPT, &interrupt);
-      sc_tcounterGet(&tc);
+      sc_regGet (IGNORE_INTERRUPT, &interrupt);
+      sc_tcounterGet (&tc);
 
       if (interrupt && tc == 0)
-      {
-        rk_readkey (&key);
-      }
-      Control (key, &currentCell, &escIsNotPresed);
+        {
+          rk_readkey (&key);
+        }
+      Control (&key, &currentCell, &escIsNotPresed);
     }
 
   rk_mytermregime (1, 1, 1, 1, 0);

@@ -14,7 +14,8 @@
 
 extern int bigchars[18][2];
 
-void loadFont(int *bigchar, int n)
+void
+loadFont (int *bigchar, int n)
 {
   FILE *f = fopen ("font/font.bin", "rb");
 
@@ -31,14 +32,14 @@ void loadFont(int *bigchar, int n)
 void
 InitMem ()
 {
-  sc_setIgnoreCache(1);
-  sc_memoryInit();
-  sc_regInit();
-  sc_accumulatorInit();
-  sc_icounterInit();
-  sc_tcounterInit();
-  sc_cacheInit();
-  sc_setIgnoreCache(0);
+  sc_setIgnoreCache (1);
+  sc_memoryInit ();
+  sc_regInit ();
+  sc_accumulatorInit ();
+  sc_icounterInit ();
+  sc_tcounterInit ();
+  sc_cacheInit ();
+  sc_setIgnoreCache (0);
 }
 
 int
@@ -105,43 +106,43 @@ printKeybord ()
 void
 printAllBoxes ()
 {
-  bc_box(1, 1, 61, 15, ForegroundDefault, BackgroundDefault,
-         " Оперативная память ", ForegroundDarkRed, ForegroundDefault);
-  bc_box(1, 16, 61, 18, ForegroundDefault, BackgroundDefault,
-         " Редактируемая ячейка (декодированно) ", ForegroundDarkRed,
-         BackgroundDefault);
-  bc_box(62, 1, 87, 3, ForegroundDefault, BackgroundDefault, " Аккумулятор ",
-         ForegroundDarkRed, BackgroundDefault);
-  bc_box(62, 4, 87, 6, ForegroundDefault, BackgroundDefault,
-         " Счётчик инструкций ", ForegroundDarkRed, BackgroundDefault);
-  bc_box(88, 4, 111, 6, ForegroundDefault, BackgroundDefault, " Команда ",
-         ForegroundDarkRed, BackgroundDefault);
-  bc_box(88, 1, 111, 3, ForegroundDefault, BackgroundDefault, " Флаги ",
-         ForegroundDarkRed, BackgroundDefault);
-  bc_box(62, 7, 111, 18, ForegroundDefault, BackgroundDefault,
-         " Редактируемая ечейка (увеличено) ", ForegroundDarkRed,
-         ForegroundDefault);
-  bc_box(67, 19, 77, 25, ForegroundDefault, BackgroundDefault, " IN--OUT ",
-         ForegroundDarkRed, BackgroundLightGray);
-  bc_box(1, 19, 66, 25, ForegroundDefault, BackgroundDefault, " Кеш Память ",
-         ForegroundDarkRed, BackgroundDefault);
-  bc_box(78, 19, 111, 25, ForegroundDefault, BackgroundDefault,
-         " Клавиатура ", ForegroundDarkRed, BackgroundDefault);
+  bc_box (1, 1, 61, 15, ForegroundDefault, BackgroundDefault,
+          " Оперативная память ", ForegroundDarkRed, ForegroundDefault);
+  bc_box (1, 16, 61, 18, ForegroundDefault, BackgroundDefault,
+          " Редактируемая ячейка (декодированно) ", ForegroundDarkRed,
+          BackgroundDefault);
+  bc_box (62, 1, 87, 3, ForegroundDefault, BackgroundDefault, " Аккумулятор ",
+          ForegroundDarkRed, BackgroundDefault);
+  bc_box (62, 4, 87, 6, ForegroundDefault, BackgroundDefault,
+          " Счётчик инструкций ", ForegroundDarkRed, BackgroundDefault);
+  bc_box (88, 4, 111, 6, ForegroundDefault, BackgroundDefault, " Команда ",
+          ForegroundDarkRed, BackgroundDefault);
+  bc_box (88, 1, 111, 3, ForegroundDefault, BackgroundDefault, " Флаги ",
+          ForegroundDarkRed, BackgroundDefault);
+  bc_box (62, 7, 111, 18, ForegroundDefault, BackgroundDefault,
+          " Редактируемая ечейка (увеличено) ", ForegroundDarkRed,
+          ForegroundDefault);
+  bc_box (67, 19, 77, 25, ForegroundDefault, BackgroundDefault, " IN--OUT ",
+          ForegroundDarkRed, BackgroundLightGray);
+  bc_box (1, 19, 66, 25, ForegroundDefault, BackgroundDefault, " Кеш Память ",
+          ForegroundDarkRed, BackgroundDefault);
+  bc_box (78, 19, 111, 25, ForegroundDefault, BackgroundDefault,
+          " Клавиатура ", ForegroundDarkRed, BackgroundDefault);
 }
 
 void
 UpdateAndDraw (int bigchars[][ARR_SIZE], int addresOfCurrentCell)
 {
-  sc_setIgnoreCache(1);
-  printMem(addresOfCurrentCell);
-  printFlags();
-  printDecodedCommand(addresOfCurrentCell);
-  printAccumulator();
-  printCounters();
-  printCommand();
-  printBigCell(addresOfCurrentCell, bigchars);
+  sc_setIgnoreCache (1);
+  printMem (addresOfCurrentCell);
+  printFlags ();
+  printDecodedCommand (addresOfCurrentCell);
+  printAccumulator ();
+  printCounters ();
+  printCommand ();
+  printBigCell (addresOfCurrentCell, bigchars);
   // printCache();
-  sc_setIgnoreCache(0);
+  sc_setIgnoreCache (0);
 }
 
 void
@@ -238,55 +239,7 @@ MemoryReset ()
 void
 Control (enum keys *key, int *currentCell, int *escIsNotPressed)
 {
-  switch (key)
-  {
-  case ESC:
-    *escIsNotPressed = 0;
-    break;
-  case RIGHT:
-    if (*currentCell == 127)
-    {
-      *currentCell -= 7;
-    }
-    else if (*currentCell % 10 == 9)
-      *currentCell -= 9;
-    else
-      *currentCell += 1;
-
-    sc_setIgnoreCache(1);
-    printMem(*currentCell);
-    sc_setIgnoreCache(0);
-    break;
-  case LEFT:
-    if (*currentCell == 120)
-    {
-      *currentCell += 7;
-    }
-    else if (*currentCell % 10 == 0)
-      *currentCell += 9;
-    else
-      *currentCell -= 1;
-
-    sc_setIgnoreCache(1);
-    printMem(*currentCell);
-    sc_setIgnoreCache(0);
-    break;
-  case UP:
-    if (*currentCell == 8 || *currentCell == 9)
-    {
-      *currentCell += 110;
-    }
-    else if (*currentCell < 10)
-      *currentCell += 120;
-    else
-      *currentCell -= 10;
-
-    sc_setIgnoreCache(1);
-    printMem(*currentCell);
-    sc_setIgnoreCache(0);
-    break;
-  case DOWN:
-    if (*currentCell == 118 || *currentCell == 119)
+  switch (*key)
     {
     case ESC:
       *escIsNotPressed = 0;
@@ -300,6 +253,10 @@ Control (enum keys *key, int *currentCell, int *escIsNotPressed)
         *currentCell -= 9;
       else
         *currentCell += 1;
+
+      sc_setIgnoreCache (1);
+      printMem (*currentCell);
+      sc_setIgnoreCache (0);
       break;
     case LEFT:
       if (*currentCell == 120)
@@ -310,6 +267,10 @@ Control (enum keys *key, int *currentCell, int *escIsNotPressed)
         *currentCell += 9;
       else
         *currentCell -= 1;
+
+      sc_setIgnoreCache (1);
+      printMem (*currentCell);
+      sc_setIgnoreCache (0);
       break;
     case UP:
       if (*currentCell == 8 || *currentCell == 9)
@@ -320,6 +281,10 @@ Control (enum keys *key, int *currentCell, int *escIsNotPressed)
         *currentCell += 120;
       else
         *currentCell -= 10;
+
+      sc_setIgnoreCache (1);
+      printMem (*currentCell);
+      sc_setIgnoreCache (0);
       break;
     case DOWN:
       if (*currentCell == 118 || *currentCell == 119)
@@ -330,32 +295,51 @@ Control (enum keys *key, int *currentCell, int *escIsNotPressed)
         *currentCell -= 120;
       else
         *currentCell += 10;
+
+      sc_setIgnoreCache (1);
+      printMem (*currentCell);
+      sc_setIgnoreCache (0);
       break;
     case ENTER:
+      sc_setIgnoreCache (1);
       InPlaceInput (*currentCell / 10 + 2, (*currentCell % 10) * 6 + 2,
                     INPUTCELL);
+      printMem (*currentCell);
+      sc_setIgnoreCache (0);
       break;
     case F5:
+      sc_setIgnoreCache (1);
       InPlaceInput (2, 69, INPUTACCUM);
+      sc_setIgnoreCache (0);
       break;
     case F6:
+      sc_setIgnoreCache (1);
       InPlaceInput (5, 69, INPUTICOUNTER);
+      sc_setIgnoreCache (0);
       break;
     case L:
+      sc_setIgnoreCache (1);
       MemoryLoad ();
+      printMem (*currentCell);
+      sc_setIgnoreCache (0);
       break;
     case S:
+      sc_setIgnoreCache (1);
       MemorySave ();
+      printMem (*currentCell);
+      sc_setIgnoreCache (0);
       break;
     case I:
+      sc_setIgnoreCache (1);
       MemoryReset ();
       sc_accumulatorInit ();
       sc_icounterInit ();
       sc_regInit ();
+      printMem (*currentCell);
+      sc_setIgnoreCache (0);
       break;
     case R:
       sc_regSet (IGNORE_INTERRUPT, 0);
-      *key = -1;
       break;
     case T:
       CU ();
@@ -363,60 +347,4 @@ Control (enum keys *key, int *currentCell, int *escIsNotPressed)
     default:
       break;
     }
-    else if (*currentCell > 119)
-      *currentCell -= 120;
-    else
-      *currentCell += 10;
-
-    sc_setIgnoreCache(1);
-    printMem(*currentCell);
-    sc_setIgnoreCache(0);
-    break;
-  case ENTER:
-    sc_setIgnoreCache(1);
-    InPlaceInput(*currentCell / 10 + 2, (*currentCell % 10) * 6 + 2,
-                 INPUTCELL);
-    printMem(*currentCell);
-    sc_setIgnoreCache(0);
-    break;
-  case F5:
-    sc_setIgnoreCache(1);
-    InPlaceInput(2, 69, INPUTACCUM);
-    sc_setIgnoreCache(0);
-    break;
-  case F6:
-    sc_setIgnoreCache(1);
-    InPlaceInput(5, 69, INPUTICOUNTER);
-    sc_setIgnoreCache(0);
-    break;
-  case L:
-    sc_setIgnoreCache(1);
-    MemoryLoad();
-    printMem(*currentCell);
-    sc_setIgnoreCache(0);
-    break;
-  case S:
-    sc_setIgnoreCache(1);
-    MemorySave();
-    printMem(*currentCell);
-    sc_setIgnoreCache(0);
-    break;
-  case I:
-    sc_setIgnoreCache(1);
-    MemoryReset();
-    sc_accumulatorInit();
-    sc_icounterInit();
-    sc_regInit();
-    printMem(*currentCell);
-    sc_setIgnoreCache(0);
-    break;
-  case R:
-    sc_regSet(IGNORE_INTERRUPT, 0);
-    break;
-  case T:
-    CU();
-    break;
-  default:
-    break;
-  }
 }
