@@ -20,7 +20,9 @@ namespace SA
 
     public:
         bool isCanBeCompiled() const;
-
         void compile();
+
+    private:
+        int fromHexToInt(const std::string &hex);
     };
 } // namespace SA

@@ -31,7 +31,7 @@ CU_READ (int cell)
   sc_setIgnoreCache (1);
   printTerm (cell, 1);
   sc_setIgnoreCache (0);
-  rk_mytermregime(0, 1, 0, 0, 0);
+  rk_mytermregime (0, 1, 0, 0, 0);
   sc_regSet (IGNORE_INTERRUPT, 0);
 }
 
@@ -41,20 +41,24 @@ CU_WRITE (int cell)
   printTerm (cell, 0);
 }
 
-void
+int
 CU_LOAD (int cell)
 {
   int value = 0;
-  sc_memoryGet (cell, &value);
+  if (sc_memoryGet (cell, &value) == -2)
+    return -2;
   sc_accumulatorSet (value);
+  return 0;
 }
 
-void
+int
 CU_STORE (int cell)
 {
   int value = 0;
   sc_accumulatorGet (&value);
-  sc_memorySet (cell, value);
+  if (sc_memorySet (cell, value) == -2)
+    return -2;
+  return 0;
 }
 
 void
@@ -81,7 +85,7 @@ CU_JZ (int cell)
   sc_accumulatorGet (&value);
   if ((value & 0x3fff) == 0)
     {
-      sc_icounterSet (value);
+      sc_icounterSet (cell);
     }
 }
 
@@ -128,6 +132,7 @@ CU ()
       return;
     }
 
+  int ret;
   switch (command)
     {
     case NOP:
@@ -142,10 +147,12 @@ CU ()
       CU_WRITE (operand);
       break;
     case LOAD:
-      CU_LOAD (operand);
+      if (CU_LOAD (operand) == -2)
+        return;
       break;
     case STORE:
-      CU_STORE (operand);
+      if (CU_STORE (operand) == -2)
+        return;
       break;
     case JUMP:
       CU_JUMP (operand);
@@ -160,7 +167,13 @@ CU ()
       CU_HALT (operand);
       break;
     default:
-      ALU (command, operand);
+      ret = ALU (command, operand);
+      if (ret == -3)
+        {
+          return;
+        }
+
+      sc_accumulatorSet (ret);
       break;
     }
 

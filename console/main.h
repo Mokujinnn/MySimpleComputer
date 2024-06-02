@@ -12,6 +12,7 @@
 #define INPUTICOUNTER 2
 
 extern int bigchars[18][2];
+extern int cell;
 
 void loadFont (int *bigchar, int n);
 

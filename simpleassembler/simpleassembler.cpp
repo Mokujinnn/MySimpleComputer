@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <strstream>
+#include <cmath>
 
 namespace SA
 {
@@ -23,7 +24,8 @@ namespace SA
                     {"JZ",      42},
                     {"HALT",    43},
                     {"NOT",     51},
-                    {"AND",     52}}),
+                    {"AND",     52},
+                    {"=",       77}}),
           outputfile(parser.getOutputFilename()),
           inputfile(parser.getInputFilename())
     {
@@ -60,12 +62,40 @@ namespace SA
             std::strstream stream;
             stream << i;
 
-            stream >> address >> command >> value;
+            stream >> address >> command;
 
+            if (command == "=")
+            {
+                stream >> command;
+                bin[address] = fromHexToInt(command);
+                continue;
+            }
+            
+            stream >> value;
             bin[address] = (commands[command] << 7 | 0 << 14) | value;
         }
 
         out.write(reinterpret_cast<const char *>(bin.data()), 128 * sizeof(int));
+    }
+
+    int Translator::fromHexToInt(const std::string &hex)
+    {
+        int value = 0;
+        value |= hex[0] == '-' ? 1 << 14 : 0;
+
+        for (int i = 1; i < 5; i++)
+        {
+            if (isalpha(hex[i]))
+            {
+                value += pow(16, 5 - i - 1) * (tolower(hex[i]) - 'a' + 10);
+            }
+            else
+            {
+                value += pow(16, 5 - i - 1) * (hex[i] - '0');
+            }
+        }
+
+        return value;
     }
 
 } // namespace SA
