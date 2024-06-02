@@ -31,7 +31,7 @@ CU_READ (int cell)
   sc_setIgnoreCache (1);
   printTerm (cell, 1);
   sc_setIgnoreCache (0);
-  // rk_mytermregime(0, 1, 0, 0, 0);
+  rk_mytermregime(0, 1, 0, 0, 0);
   sc_regSet (IGNORE_INTERRUPT, 0);
 }
 

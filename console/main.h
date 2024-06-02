@@ -11,6 +11,8 @@
 #define INPUTACCUM 1
 #define INPUTICOUNTER 2
 
+extern int bigchars[18][2];
+
 void loadFont (int *bigchar, int n);
 
 void InitMem ();
