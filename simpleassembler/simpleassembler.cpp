@@ -25,6 +25,7 @@ namespace SA
                     {"HALT",    43},
                     {"NOT",     51},
                     {"AND",     52},
+                    {"JNS",     55},
                     {"=",       77}}),
           outputfile(parser.getOutputFilename()),
           inputfile(parser.getInputFilename())
@@ -47,6 +48,7 @@ namespace SA
         if (file.empty())
         {
             std::cout << "Cant open file " << inputfile << '\n';
+            return;
         }
 
         // bool returncode = parser.lexer(file);
@@ -68,6 +70,7 @@ namespace SA
             {
                 stream >> command;
                 bin[address] = fromHexToInt(command);
+
                 continue;
             }
             

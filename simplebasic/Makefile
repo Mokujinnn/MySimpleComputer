@@ -3,10 +3,10 @@ CFLAGS = -Wall -g -O0
 
 SRC = $(wildcard *.cpp)
 OBJ = $(SRC:.cpp=.o)
-HEADER = $(wildcard ./*.hpp)
-INCLUDEDIR = ../include/
+HEADER = $(wildcard ../simpleassembler/*.hpp) $(wildcard ./*.hpp)
+INCLUDEDIR = ../simpleassembler
 
-TARGET = sat
+TARGET = sbt
 
 all:$(TARGET)
 

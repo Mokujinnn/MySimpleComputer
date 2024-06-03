@@ -96,6 +96,17 @@ CU_HALT (int cell)
 }
 
 void
+CU_JNS (int cell_number)
+{
+  int value;
+  sc_accumulatorGet (&value);
+  if (((value >> 14) == 0) && (value & 0x3fff) != 0)
+    {
+      sc_icounterSet (cell_number);
+    }
+}
+
+void
 CU ()
 {
   int sign = 0;
@@ -165,6 +176,9 @@ CU ()
       break;
     case HALT:
       CU_HALT (operand);
+      break;
+    case JNS:
+      CU_JNS (operand);
       break;
     default:
       ret = ALU (command, operand);
