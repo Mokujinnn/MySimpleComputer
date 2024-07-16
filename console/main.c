@@ -11,11 +11,11 @@
 #include "mySimpleComputer.h"
 
 int bigchars[18][2];
+int cell = 0;
 
 int
 main ()
 {
-  int currentCell = 0;
   int escIsNotPresed = 1;
   enum keys key = -1;
   int interrupt = 0;
@@ -26,7 +26,7 @@ main ()
 
   printAllBoxes ();
   printKeybord ();
-  UpdateAndDraw (bigchars, currentCell);
+  UpdateAndDraw (bigchars, cell);
 
   signal (SIGALRM, IRC);
   signal (SIGUSR1, IRC);
@@ -54,7 +54,7 @@ main ()
         {
           rk_readkey (&key);
         }
-      Control (&key, &currentCell, &escIsNotPresed);
+      Control (&key, &cell, &escIsNotPresed);
     }
 
   rk_mytermregime (1, 1, 1, 1, 0);

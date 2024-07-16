@@ -1,4 +1,5 @@
 #include "console.h"
+#include "main.h"
 #include "mySimpleComputer.h"
 #include <signal.h>
 
@@ -26,6 +27,8 @@ IRC (int signum)
           sc_setIgnoreCache (1);
           printFlags ();
           printAccumulator ();
+          printMem (cell);
+          printBigCell (cell, bigchars);
           printCounters ();
           printCommand ();
           // printCache();
@@ -46,6 +49,8 @@ IRC (int signum)
         return;
       CU ();
       sc_setIgnoreCache (1);
+      printMem (cell);
+      printBigCell (cell, bigchars);
       printFlags ();
       printAccumulator ();
       printCounters ();

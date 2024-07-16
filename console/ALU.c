@@ -1,38 +1,36 @@
 #include "console.h"
 #include "mySimpleComputer.h"
 
-void
+int
 ALU_ADD (int cell)
 {
-  int accumulator = 0;
-  int memory = 0;
-
-  sc_accumulatorGet (&accumulator);
-  sc_memoryGet (cell, &memory);
-
-  sc_accumulatorSet ((accumulator + memory) & 0x7fff);
+  int accumulator_value, memory_value;
+  sc_accumulatorGet (&accumulator_value);
+  if (sc_memoryGet (cell, &memory_value) == -2)
+    return -3;
+  return (((accumulator_value << 17) + (memory_value << 17)) >> 17) & 0x7FFF;
 }
 
-void
+int
 ALU_SUB (int cell)
 {
-  int accumulator = 0;
-  int memory = 0;
-
-  sc_accumulatorGet (&accumulator);
-  sc_memoryGet (cell, &memory);
-
-  sc_accumulatorSet ((accumulator + (~memory + 1)) & 0x7fff);
+  int accumulator_value, memory_value;
+  sc_accumulatorGet (&accumulator_value);
+  if (sc_memoryGet (cell, &memory_value) == -2)
+    return -3;
+  return (((accumulator_value << 17) + ((~memory_value + 1) << 17)) >> 17)
+         & 0x7FFF;
 }
 
-void
+int
 ALU_DIVIDE (int cell)
 {
   int accumulator = 0;
   int memory = 0;
 
   sc_accumulatorGet (&accumulator);
-  sc_memoryGet (cell, &memory);
+  if (sc_memoryGet (cell, &memory) == -2)
+    return -3;
 
   if (memory == 0)
     {
@@ -48,82 +46,82 @@ ALU_DIVIDE (int cell)
       value = value | 0x4000;
     }
 
-  sc_accumulatorSet (value);
+  return (value);
 }
 
-void
+int
 ALU_MUL (int cell)
 {
   int accumulator = 0;
   int memory = 0;
 
   sc_accumulatorGet (&accumulator);
-  sc_memoryGet (cell, &memory);
+  if (sc_memoryGet (cell, &memory) == -2)
+    return -3;
 
   int accumulator_sign = accumulator >> 14;
   int memory_sign = memory >> 14;
-
-  // if (accumulator_sign)
-  // {
-  //     accumulator = ~accumulator + 1;
-  // }
-  // if (memory_sign)
-  // {
-  //     memory = ~memory + 1;
-  // }
 
   int value = (memory * accumulator) & 0x3fff;
 
   if (accumulator_sign ^ memory_sign)
     {
-      value = (~value + 1) | 0x4000;
+      value = ((~value & 0x3FFF) + 1) | 0x4000;
     }
 
-  sc_accumulatorSet (value);
+  return (value);
 }
 
-void
+int
 ALU_NOT (int cell)
 {
   int value = 0;
   sc_accumulatorGet (&value);
-  sc_memorySet (cell, (~value & 0x7fff));
+  if (sc_memorySet (cell, (~value & 0x7fff)) == -2)
+    return -3;
+
+  return 0;
 }
 
-void
+int
 ALU_AND (int cell)
 {
   int value = 0;
   int mem = 0;
-  sc_accumulatorGet (&value);
-  sc_memoryGet (cell, &mem);
+  if (sc_accumulatorGet (&value) == -2)
+    return -3;
+  if (sc_memoryGet (cell, &mem) == -2)
+    return -3;
   sc_accumulatorSet (mem & value);
+
+  return 0;
 }
 
-void
+int
 ALU (int command, int operand)
 {
   switch (command)
     {
     case ADD:
-      ALU_ADD (operand);
+      return ALU_ADD (operand);
       break;
     case SUB:
-      ALU_SUB (operand);
+      return ALU_SUB (operand);
       break;
     case DIVIDE:
-      ALU_DIVIDE (operand);
+      return ALU_DIVIDE (operand);
       break;
     case MUL:
-      ALU_MUL (operand);
+      return ALU_MUL (operand);
       break;
     case NOT:
-      ALU_NOT (operand);
+      return ALU_NOT (operand);
       break;
     case AND:
-      ALU_AND (operand);
+      return ALU_AND (operand);
       break;
     default:
       break;
     }
+  return 0;
 }

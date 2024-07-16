@@ -341,6 +341,7 @@ Control (enum keys *key, int *currentCell, int *escIsNotPressed)
       break;
     case T:
       CU ();
+      sc_regSet (IGNORE_INTERRUPT, 1);
       break;
     default:
       break;

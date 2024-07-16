@@ -58,7 +58,7 @@ void printTerm (int address, int input);
 void printCommand ();
 void printBigCell (int address, int bigchars[][ARR_SIZE]);
 void printCache ();
-void ALU (int command, int operand);
+int ALU (int command, int operand);
 void CU ();
 void IRC (int signum);
 

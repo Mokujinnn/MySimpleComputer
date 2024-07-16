@@ -19,6 +19,12 @@ printAccumulator ()
 
   str[4] = sign == 0 ? '+' : '-';
 
+  if (sign)
+    {
+      value = (~value & 0x3FFF) + 1;
+      sc_commandDecode (value, &sign, &command, &operand);
+    }
+
   snprintf (&str[5], 15, "%.2x%.2x hex: %.4x", command, operand, value);
 
   mt_gotoXY (65, 2);
