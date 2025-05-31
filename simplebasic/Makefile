@@ -20,4 +20,4 @@ $(TARGET): $(OBJ)
 
 
 rm:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) sbt
